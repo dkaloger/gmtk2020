@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class basicplant : MonoBehaviour
+public class watermelon : MonoBehaviour
 {
-    //statts
 
-    // public int growthstate1startingpoint;
+    //statts
+    public float speed;
+
     public int growthstate2startingpoint;
 
     public int growthstate3startingpoint;
 
     public int currentgrowthstate;
 
-    public int currentgrowth ;
+    public int currentgrowth;
 
     public int growth_coeficient;
     public Transform tr;
 
+
+
+    //reaction
+
+    GameObject target_plant;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +34,11 @@ public class basicplant : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(currentgrowth < growthstate3startingpoint)
+        if (currentgrowth < growthstate3startingpoint)
         {
             currentgrowth++;
         }
-     
+
         if (currentgrowth > growthstate2startingpoint && currentgrowth < growthstate3startingpoint)
         {
             currentgrowthstate = 2;
@@ -40,9 +46,19 @@ public class basicplant : MonoBehaviour
         if (currentgrowth > growthstate3startingpoint)
         {
             currentgrowthstate = 3;
+
         }
 
         // change size 
-        tr.localScale = new Vector3(currentgrowth / growth_coeficient, currentgrowth / growth_coeficient,currentgrowth / growth_coeficient);
+        tr.localScale = new Vector3(currentgrowth / growth_coeficient, currentgrowth / growth_coeficient, currentgrowth / growth_coeficient);
+
+        //reaction
+        if (currentgrowthstate == 3)
+        {
+            target_plant = GameObject.FindWithTag("plant");
+            transform.position = Vector3.MoveTowards(tr.position, target_plant.transform.position, speed);
+        }
+          
     }
+
 }
