@@ -13,7 +13,7 @@ public class basicplant : MonoBehaviour
 
     public int currentgrowthstate;
 
-    public int currentgrowth;
+    public int currentgrowth ;
 
     public int growth_coeficient;
     public Transform tr;
@@ -21,6 +21,7 @@ public class basicplant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentgrowth = growth_coeficient;
         tr = gameObject.GetComponent<Transform>();
     }
 
