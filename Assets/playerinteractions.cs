@@ -24,11 +24,16 @@ public class playerinteractions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //planting
+
 
 
     }
     void OnCollisionEnter(Collision collision)
     {
+        //planting
+
+        //harvesting
         if (collision.gameObject.tag == "plant" || collision.gameObject.tag == "attackable-plant") {
             Debug.Log("l28");
             col = collision.gameObject.GetComponent<plant_player>();
