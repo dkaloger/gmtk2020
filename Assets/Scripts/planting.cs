@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class planting : MonoBehaviour
 {
+   
     public Player p;
     public GameObject watermelon;
     public GameObject parsnip;
@@ -47,7 +48,7 @@ public class planting : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && p._inventory["radishseeds"] >0)
         {
             p._inventory["radishseeds"] = p._inventory["radishseeds"]-1;
             rand = Random.Range(1, 4);
