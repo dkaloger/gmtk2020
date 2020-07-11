@@ -1,0 +1,205 @@
+fileFormatVersion: 2
+guid: f6033d4c6ff774341aa68e84a09dab71
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -5618668722802028542
+    second: Circle.002|Circle.002Action
+  - first:
+      74: 8242333128477707422
+    second: Circle.002|Circle.004Action
+  - first:
+      74: 5239277426838171146
+    second: Circle.002|Circle.005Action
+  - first:
+      74: 4205239627134784173
+    second: Circle.002|Circle.006Action
+  - first:
+      74: -5462107209625934784
+    second: Circle.002|Circle.007Action
+  - first:
+      74: 5913537063776676632
+    second: Circle.002|Circle.008Action
+  - first:
+      74: 6027775504880494101
+    second: Circle.004|Circle.002Action
+  - first:
+      74: -4090819288717459287
+    second: Circle.004|Circle.004Action
+  - first:
+      74: -1675940329241999612
+    second: Circle.004|Circle.005Action
+  - first:
+      74: -3913420414532584812
+    second: Circle.004|Circle.006Action
+  - first:
+      74: 5613233910241642427
+    second: Circle.004|Circle.007Action
+  - first:
+      74: -3805993684718812803
+    second: Circle.004|Circle.008Action
+  - first:
+      74: -948314565121983603
+    second: Circle.005|Circle.002Action
+  - first:
+      74: 1524719785256721631
+    second: Circle.005|Circle.004Action
+  - first:
+      74: 8216294050978103995
+    second: Circle.005|Circle.005Action
+  - first:
+      74: -1789398760181179729
+    second: Circle.005|Circle.006Action
+  - first:
+      74: -5716060114822212772
+    second: Circle.005|Circle.007Action
+  - first:
+      74: -235376865894777330
+    second: Circle.005|Circle.008Action
+  - first:
+      74: 1260083862032454555
+    second: Circle.006|Circle.002Action
+  - first:
+      74: 7655027689421009735
+    second: Circle.006|Circle.004Action
+  - first:
+      74: -7243051524919888254
+    second: Circle.006|Circle.005Action
+  - first:
+      74: -7145920864411528567
+    second: Circle.006|Circle.006Action
+  - first:
+      74: -423536794125342215
+    second: Circle.006|Circle.007Action
+  - first:
+      74: -7428255248704242941
+    second: Circle.006|Circle.008Action
+  - first:
+      74: 4183542254460218008
+    second: Circle.007|Circle.002Action
+  - first:
+      74: 8524467257455247079
+    second: Circle.007|Circle.004Action
+  - first:
+      74: 4136326714846423065
+    second: Circle.007|Circle.005Action
+  - first:
+      74: -8432549626934861081
+    second: Circle.007|Circle.006Action
+  - first:
+      74: 3358097546709636436
+    second: Circle.007|Circle.007Action
+  - first:
+      74: -886242646865129489
+    second: Circle.007|Circle.008Action
+  - first:
+      74: 1032649530593033550
+    second: Circle.008|Circle.002Action
+  - first:
+      74: -6191848163532087563
+    second: Circle.008|Circle.004Action
+  - first:
+      74: 8986486563821618310
+    second: Circle.008|Circle.005Action
+  - first:
+      74: 2124104052983035157
+    second: Circle.008|Circle.006Action
+  - first:
+      74: -4691740002245675538
+    second: Circle.008|Circle.007Action
+  - first:
+      74: -1691860921728378060
+    second: Circle.008|Circle.008Action
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -19,10 +19,10 @@ public class watermelon : MonoBehaviour
 
     public int currentgrowthstate;
 
-    public int currentgrowth;
+    public float currentgrowth;
     public int t;
     public int rand;
-    public int growth_coeficient;
+    public float growth_coeficient;
     public Transform tr;
 
     bool oncce;
