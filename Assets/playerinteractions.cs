@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class playerinteractions : MonoBehaviour
 {
     //market
     public int my_money;
+  //  public TextMeshProUGUI t;
+  //  public TextMeshPro tmp;
+
     public int watermelonprice;
+
     //  public int watermelonprice;
     //  public int watermelonprice;
     //  public int watermelonprice;
@@ -14,13 +18,14 @@ public class playerinteractions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+   
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -29,7 +34,7 @@ public class playerinteractions : MonoBehaviour
             col = collision.gameObject.GetComponent<plant_player>();
             if (col.currentgrowthstate_loc == 2 )
             {
-              //  if (Input.GetKeyDown(KeyCode.Tab))
+              //  if (Input.GetKeyDown(KeyCode.f))
                 //{
                     Debug.Log("l31");
                     if (col.plant_type == 1)
