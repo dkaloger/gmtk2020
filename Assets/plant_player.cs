@@ -6,13 +6,13 @@ public class plant_player : MonoBehaviour
 {
     public watermelon watermelon;
     public sneaky_parnsnip parnsnip;
-    //  watermelon watermelon;
+   public  corn corn;
     //  watermelon watermelon;
     //   watermelon watermelon;
     public int plant_type;
     // 1 watermelon,2 parnsnip,3corn,
 
-    public int currentgrowth_loc;
+    public float currentgrowth_loc;
     public int currentgrowthstate_loc;
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,11 @@ public class plant_player : MonoBehaviour
         {
             currentgrowth_loc = parnsnip.currentgrowth;
             currentgrowthstate_loc = parnsnip.currentgrowthstate;
+        }
+        if (plant_type == 3)
+        {
+            currentgrowth_loc = corn.currentgrowth;
+            currentgrowthstate_loc = corn.currentgrowthstate;
         }
     }
 }

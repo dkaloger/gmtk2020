@@ -12,7 +12,7 @@ public class playerinteractions : MonoBehaviour
     public int watermelonprice;
 
      public int parsnipprice;
-    //  public int watermelonprice;
+      public int cornprice;
     //  public int watermelonprice;
     public plant_player col;
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class playerinteractions : MonoBehaviour
         if (collision.gameObject.tag == "plant" || collision.gameObject.tag == "attackable-plant") {
             Debug.Log("l28");
             col = collision.gameObject.GetComponent<plant_player>();
-            if (col.currentgrowthstate_loc == 2 )
+            if (col.currentgrowthstate_loc == 2f )
             {
               //  if (Input.GetKeyDown(KeyCode.f))
                 //{
@@ -51,6 +51,11 @@ public class playerinteractions : MonoBehaviour
                 {
                     my_money += parsnipprice;
                 //    Debug.Log("l35");
+                }
+                if (col.plant_type == 3)
+                {
+                    my_money += cornprice;
+                    //    Debug.Log("l35");
                 }
 
                 //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 	public float _speed = 100;
 	Vector3 _velocity;
 
+	public health health;
+
 	public Dictionary<string, int> _inventory;
 	public static string[] ItemOrder = {
 		"water", "radishseeds", "cornseeds", "watermelonseeds"
@@ -26,7 +28,11 @@ public class Player : MonoBehaviour
 	void FixedUpdate() {
 	
 		var rigidbody = gameObject.GetComponent<Rigidbody>();
-		transform.Translate(_velocity * Time.fixedDeltaTime);
+		if (health.stunned == false)
+		{
+			transform.Translate(_velocity * Time.fixedDeltaTime);
+		}
+		
 	}
 
 	public void OnMove(InputValue val) {
