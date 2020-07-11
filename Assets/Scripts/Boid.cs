@@ -34,14 +34,6 @@ public class Boid : MonoBehaviour
 
     protected Rigidbody rb;
 
-	// Require rigidbody
-	// Need the terrain so I can set my Y up on it. 
-	// I want to get and create a sphere on this object and get collision for everything inside this radius. 
-	// Based on the types of objects affect force on my desired vector
-	// Avoid other colliders based on distance
-	// Attract to a target point by default //this point's movement behavior will determin our plant AI
-	// 
-
 	private void Awake()
 	{
         rb = GetComponent<Rigidbody>();
