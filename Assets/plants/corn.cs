@@ -5,6 +5,11 @@ using UnityEngine;
 public class corn : MonoBehaviour
 {
     public bool Can_attack = false;
+    public float attack_interval = 2;
+    float attack_timer;
+    public GameObject attack_missile;
+    GameObject player;
+
     public int growthstate2startingpoint;
 
     public int growthstate3startingpoint;
@@ -18,7 +23,9 @@ public class corn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         currentgrowth = growth_coeficient/2;
+        attack_timer = attack_interval;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -50,6 +57,21 @@ public class corn : MonoBehaviour
         if (currentgrowthstate == 3)
         {
             Can_attack = true;
+        }
+        if (Can_attack && player)
+        {
+            attack_timer -= Time.deltaTime;
+            if (attack_timer <= 0)
+            {
+                attack_timer += attack_interval;
+                Vector3 direction = (player.transform.position - transform.position);
+                direction.y = 0;
+                direction.Normalize();
+                GameObject missile = Instantiate(attack_missile, transform.position+direction, transform.rotation);
+                Physics.IgnoreCollision(GetComponent<Collider>(), missile.GetComponent<Collider>());
+                Boid boid = missile.GetComponent<Boid>();
+                boid._target = player.transform;
+            }
         }
     }
 }
