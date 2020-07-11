@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class planting : MonoBehaviour
 {
+    public Player p;
     public GameObject watermelon;
-   public Transform player;
+    public GameObject parsnip;
+    public Transform player;
     public Vector3 player_pos;
 
  //public Vector3 q1_edge1;
@@ -17,6 +19,7 @@ public class planting : MonoBehaviour
     public Vector3 q3_edge1;
     public Vector3 q3_edge2;
     public int my_q;
+    public int rand;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,10 +48,22 @@ public class planting : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-          if(my_q == 1)
+            p._inventory["radishseeds"] = p._inventory["radishseeds"]-1;
+            rand = Random.Range(1, 3);
+            //for testing only removed
+           // rand = 1;
+          if (rand == 1)
             {
                 Instantiate(watermelon, player_pos, new Quaternion(0f, 0f, 0f, 0f));
             }
+          if (rand == 2)
+         {
+          Instantiate(parsnip, player_pos, new Quaternion(0f, 0f, 0f, 0f));
+     }
+          //  if (rand == 1)
+        //    {
+        //        Instantiate(watermelon, player_pos, new Quaternion(0f, 0f, 0f, 0f));
+        //    }
         }
 
     }

@@ -11,7 +11,7 @@ public class playerinteractions : MonoBehaviour
 
     public int watermelonprice;
 
-    //  public int watermelonprice;
+     public int parsnipprice;
     //  public int watermelonprice;
     //  public int watermelonprice;
     public plant_player col;
@@ -41,28 +41,33 @@ public class playerinteractions : MonoBehaviour
             {
               //  if (Input.GetKeyDown(KeyCode.f))
                 //{
-                    Debug.Log("l31");
+             //       Debug.Log("l31");
                     if (col.plant_type == 1)
                     {
                         my_money += watermelonprice;
-                        Debug.Log("l35");
+                   //     Debug.Log("l35");
                     }
+                if (col.plant_type == 2)
+                {
+                    my_money += parsnipprice;
+                //    Debug.Log("l35");
+                }
 
-                    //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                    //   {
-                    //       my_money += watermelonprice;
-                    //   }
-                    //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                    //   {
-                    //        my_money += watermelonprice;
-                    //    }
-                    //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                    //  {
-                    //      my_money += watermelonprice;
-                    //    }
+                //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
+                //   {
+                //       my_money += watermelonprice;
+                //   }
+                //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
+                //   {
+                //        my_money += watermelonprice;
+                //    }
+                //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
+                //  {
+                //      my_money += watermelonprice;
+                //    }
 
 
-                    Destroy(collision.gameObject);
+                Destroy(collision.gameObject);
                // }
               
             }
