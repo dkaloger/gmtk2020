@@ -23,7 +23,7 @@ public class watermelon : MonoBehaviour
 
     //reaction
 
-    GameObject target_plant;
+    public GameObject target_plant;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +43,7 @@ public class watermelon : MonoBehaviour
         {
             currentgrowthstate = 2;
         }
-        if (currentgrowth > growthstate3startingpoint)
+        if (currentgrowth > growthstate3startingpoint-1)
         {
             currentgrowthstate = 3;
 
@@ -55,10 +55,21 @@ public class watermelon : MonoBehaviour
         //reaction
         if (currentgrowthstate == 3)
         {
-            target_plant = GameObject.FindWithTag("plant");
+            target_plant = GameObject.FindWithTag("attackable-plant");
+         
             transform.position = Vector3.MoveTowards(tr.position, target_plant.transform.position, speed);
         }
           
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("collision");
+        if(collision.gameObject == target_plant)
+        {
+            Debug.Log("collision with target");
+            Destroy(target_plant);
+            Destroy(this.gameObject);
+        }
     }
 
 }
