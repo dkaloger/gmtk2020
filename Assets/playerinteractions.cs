@@ -24,29 +24,37 @@ public class playerinteractions : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "plant" || collision.gameObject.tag == "plant") {
-            if (collision.gameObject.GetComponent<plant_player>().currentgrowthstate_loc == 2 && Input.GetKeyDown("space"))
+        if (collision.gameObject.tag == "plant" || collision.gameObject.tag == "attackable-plant") {
+            Debug.Log("l28");
+            col = collision.gameObject.GetComponent<plant_player>();
+            if (col.currentgrowthstate_loc == 2 )
             {
-                if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                {
-                    my_money += watermelonprice;
-                }
+              //  if (Input.GetKeyDown(KeyCode.Tab))
+                //{
+                    Debug.Log("l31");
+                    if (col.plant_type == 1)
+                    {
+                        my_money += watermelonprice;
+                        Debug.Log("l35");
+                    }
 
-                //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                //   {
-                //       my_money += watermelonprice;
-                //   }
-                //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                //   {
-                //        my_money += watermelonprice;
-                //    }
-                //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
-                //  {
-                //      my_money += watermelonprice;
-                //    }
+                    //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
+                    //   {
+                    //       my_money += watermelonprice;
+                    //   }
+                    //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
+                    //   {
+                    //        my_money += watermelonprice;
+                    //    }
+                    //  if (collision.gameObject.GetComponent<plant_player>().plant_type == 1)
+                    //  {
+                    //      my_money += watermelonprice;
+                    //    }
 
 
-                Destroy(collision.gameObject);
+                    Destroy(collision.gameObject);
+               // }
+              
             }
         }
     }
