@@ -16,7 +16,7 @@ public class seed_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      i= p._inventory["radishseeds"];
+      i = p._inventory["radishseeds"];
         t.text = i.ToString();
     }
 }
