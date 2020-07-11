@@ -9,7 +9,7 @@ public class plant_player : MonoBehaviour
     //  watermelon watermelon;
     //   watermelon watermelon;
     public int plant_type; 
-    // 1 watermelon,2 parnsnip,3corn,4 weeds
+    // 1 watermelon,2 parnsnip,3corn,
 
     public int currentgrowth_loc;
     public int currentgrowthstate_loc;

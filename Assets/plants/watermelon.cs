@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class watermelon : MonoBehaviour
 {
+
+
+    public GameObject[]targets;
+
+
 
     //statts
     public float speed;
@@ -15,11 +20,12 @@ public class watermelon : MonoBehaviour
     public int currentgrowthstate;
 
     public int currentgrowth;
-
+    public int t;
+    public int rand;
     public int growth_coeficient;
     public Transform tr;
 
-
+    bool oncce;
 
     //reaction
 
@@ -34,6 +40,7 @@ public class watermelon : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        targets = GameObject.FindGameObjectsWithTag("attackable-plant");
         if (currentgrowth < growthstate3startingpoint)
         {
             currentgrowth++;
@@ -55,9 +62,36 @@ public class watermelon : MonoBehaviour
         //reaction
         if (currentgrowthstate == 3)
         {
-            target_plant = GameObject.FindWithTag("attackable-plant");
-         
-            transform.position = Vector3.MoveTowards(tr.position, target_plant.transform.position, speed);
+            //  if (t > 600)
+            //  {
+         if   (oncce == true)
+            {
+                rand = Random.Range(2, targets.Length);
+                oncce = false;
+            }
+             
+              //  if(targets[rand] = this.gameObject)
+             //   {
+              //      Destroy(this.gameObject);
+             //   }
+                target_plant = targets[rand];
+
+       //     }
+         //   target_plant = GameObject.FindWithTag("attackable-plant");
+                t = 0;
+            
+          
+            t++;
+            if (target_plant == null || target_plant == this.gameObject)
+            {
+                rand = Random.Range(2, targets.Length);
+                target_plant = targets[rand];
+            }
+                if (target_plant != null && target_plant != this.gameObject)
+            {
+                transform.position = Vector3.MoveTowards(tr.position, target_plant.transform.position, speed);
+            }
+
         }
           
     }
@@ -71,5 +105,5 @@ public class watermelon : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
 }
+
