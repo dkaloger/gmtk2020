@@ -7,6 +7,7 @@ public class planting : MonoBehaviour
     public Player p;
     public GameObject watermelon;
     public GameObject parsnip;
+    public GameObject corn;
     public Transform player;
     public Vector3 player_pos;
 
@@ -49,7 +50,7 @@ public class planting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             p._inventory["radishseeds"] = p._inventory["radishseeds"]-1;
-            rand = Random.Range(1, 3);
+            rand = Random.Range(1, 4);
             //for testing only removed
            // rand = 1;
           if (rand == 1)
@@ -60,10 +61,11 @@ public class planting : MonoBehaviour
          {
           Instantiate(parsnip, player_pos, new Quaternion(0f, 0f, 0f, 0f));
      }
-          //  if (rand == 1)
-        //    {
-        //        Instantiate(watermelon, player_pos, new Quaternion(0f, 0f, 0f, 0f));
-        //    }
+            if (rand == 3)
+            {
+                Instantiate(corn, player_pos, new Quaternion(0f, 0f, 0f, 0f));
+            }
+       
         }
 
     }

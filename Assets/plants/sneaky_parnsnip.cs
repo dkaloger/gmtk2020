@@ -16,9 +16,9 @@ public class sneaky_parnsnip : MonoBehaviour
 
     public int currentgrowthstate;
 
-    public int currentgrowth;
+    public float currentgrowth;
 
-    public int growth_coeficient;
+    public float growth_coeficient;
     public Transform tr;
 
     // Start is called before the first frame update
