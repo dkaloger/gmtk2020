@@ -47,6 +47,6 @@ public class FollowCamera : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, _target.position + _moveOffset, ref _velocity, _smoothTime);
-        //transform.rotation = Quaternion.LookRotation(_target.position + _lookOffset - transform.position); //The jitter of the camera is coming from the look transform. So I've just stopped it for now. Might bind it to the mouse later.
+        //transform.rotation = Quaternion.LookRotation(_target.position + _lookOffset - transform.position); //The jitter of the camera is coming from the look transform. So I've just stopped it for now. Might bind it to the mouse later. 
     }
 }
