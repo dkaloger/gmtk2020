@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 public class playerinteractions : MonoBehaviour
 {
-    public adiomanager_main au;
     //market
     public int my_money;
   //  public TextMeshProUGUI t;
@@ -38,9 +37,8 @@ public class playerinteractions : MonoBehaviour
         if (collision.gameObject.tag == "plant" || collision.gameObject.tag == "attackable-plant") {
             Debug.Log("l28");
             col = collision.gameObject.GetComponent<plant_player>();
-            if (col.currentgrowthstate_loc == 2f || col.currentgrowthstate_loc == 3f)
+            if (col.currentgrowthstate_loc == 2f )
             {
-                au.Play();
               //  if (Input.GetKeyDown(KeyCode.f))
                 //{
              //       Debug.Log("l31");

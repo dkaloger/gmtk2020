@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2249013267303624727}
-  m_Mesh: {fileID: -2228417370725966487, guid: 759859a8845a0044db1a4514c53bfe1f, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2249013267303624723
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -132,8 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   watermelon: {fileID: 2249013267303624721}
-  parnsnip: {fileID: 0}
-  corn: {fileID: 0}
   plant_type: 1
   currentgrowth_loc: 0
   currentgrowthstate_loc: 0
