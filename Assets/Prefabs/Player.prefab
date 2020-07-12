@@ -240,7 +240,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6541842814828292575}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b17bddb857e99384a9275c6fdca492c2, type: 2}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 71ee5aa16c57b7342a7375a0b9de5924, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
