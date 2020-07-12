@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2092785164633757363}
   - component: {fileID: 1909992957753462380}
-  - component: {fileID: 1909992957753462383}
   - component: {fileID: 1603494396580563976}
   - component: {fileID: 1909992957753462369}
+  - component: {fileID: 4631320619239068871}
   m_Layer: 0
   m_Name: Corn
   m_TagString: attackable-plant
@@ -51,19 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!135 &1909992957753462383
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603494396580563977}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1603494396580563976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,13 +85,25 @@ MonoBehaviour:
   attack_interval: 2
   attack_missile: {fileID: 8572408508639028706, guid: 5c2516e50a108df4fa11013a373a53d6,
     type: 3}
-  player: {fileID: 0}
   growthstate2startingpoint: 1500
   growthstate3startingpoint: 3000
   currentgrowthstate: 0
   currentgrowth: 0
   growth_coeficient: 1678
   tr: {fileID: 2092785164633757363}
+--- !u!65 &4631320619239068871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603494396580563977}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 7, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6348047610690101889
 GameObject:
   m_ObjectHideFlags: 0
