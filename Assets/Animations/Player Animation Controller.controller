@@ -119,13 +119,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Planting
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -150,15 +150,6 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 8c0c9d9c5ecd82d45bfa309682552f92,
       type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0.1, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Speed
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: c30241c430640c64a9c494557c5b2192,
-      type: 3}
     m_Threshold: 0.1
     m_Position: {x: 0.3, y: 0}
     m_TimeScale: 1
@@ -166,18 +157,27 @@ BlendTree:
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 4ff84ef7488e1e0479aaa43736142797,
+    m_Motion: {fileID: -203655887218126122, guid: 7bb4b171ea8f0af41893083c7cda7f1e,
+      type: 3}
+    m_Threshold: 0.3
+    m_Position: {x: 0.8, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Speed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 2cc32d20c6f2e0443aed514cda01e344,
       type: 3}
     m_Threshold: 0.8
-    m_Position: {x: 0.8, y: 0}
+    m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   m_BlendParameter: Speed
   m_BlendParameterY: TurnSpeed
-  m_MinThreshold: 0
-  m_MaxThreshold: 5
+  m_MinThreshold: 0.1
+  m_MaxThreshold: 0.8
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
