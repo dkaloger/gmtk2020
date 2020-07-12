@@ -6,6 +6,7 @@ TagManager:
   tags:
   - plant
   - attackable-plant
+  - ground
   layers:
   - Default
   - TransparentFX
