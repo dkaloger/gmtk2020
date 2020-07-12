@@ -164,7 +164,7 @@ MonoBehaviour:
   watermelon: {fileID: 2249013267303624727, guid: c6acbe0b69639774099675ea2b196558,
     type: 3}
   parsnip: {fileID: 0}
-  corn: {fileID: 0}
+  corn: {fileID: 1603494396580563977, guid: b75b1cd12f931074dad4fc21102bfbb5, type: 3}
   player: {fileID: 6541842814828292569}
   player_pos: {x: 0, y: 0, z: 0}
   q1_edge2: {x: 59.02, y: -1.91, z: 59.1}
