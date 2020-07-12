@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Can_attack: 0
-  attack_interval: 2
+  attack_interval: 6
   attack_missile: {fileID: 8572408508639028706, guid: 5c2516e50a108df4fa11013a373a53d6,
     type: 3}
   growthstate2startingpoint: 1500
