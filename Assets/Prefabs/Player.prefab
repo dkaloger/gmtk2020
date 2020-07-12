@@ -102,6 +102,7 @@ MonoBehaviour:
   _speed: 10
   _plantDistance: 1.5
   health: {fileID: 6710056863966653022}
+  _model: {fileID: 927466145752734732}
 --- !u!114 &6710056863966653021
 MonoBehaviour:
   m_ObjectHideFlags: 0

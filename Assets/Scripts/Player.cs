@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
 	};
 	int _currentItemIndex;
 
+	[SerializeField]
+	protected Transform _model; //this is a reference to the child of the player and the model from Mixamo
+
 	//reference to the animator used to control animations.
 	Animator _animator;
 
@@ -49,10 +52,10 @@ public class Player : MonoBehaviour
 			if (_velocity != Vector3.zero)
 			{
 				_facing = _velocity.normalized;
-				var model = gameObject.GetComponentInChildren<MeshRenderer>();
-				if (model)
+				//_model = gameObject.GetComponentInChildren<MeshRenderer>(); // Set this in inspector
+				if (_model)
                 {
-					model.transform.LookAt(transform.position + _facing);
+					_model.LookAt(transform.position + _facing);
 
 				}
 			}
@@ -65,12 +68,8 @@ public class Player : MonoBehaviour
 		var rigidbody = gameObject.GetComponent<Rigidbody>();
 		_velocity = new Vector3(move.x, 0, move.y) * _speed;
 
-		Vector3 animDir = new Vector3(_velocity.x, 0, _velocity.z);//based on velocity how do we want to blend walk anims
-		float forward = Vector3.Dot(animDir, transform.forward);
-		float strafe = Vector3.Dot(animDir, transform.right);
-
-		_animator.SetFloat("Speed", forward); //tells the animator how fast we are going
-		_animator.SetFloat("TurnSpeed", strafe);
+		_animator.SetFloat("Speed", Mathf.Clamp(_velocity.magnitude, 0f, 1f)); //tells the animator how fast we are going
+		
 	}
 
 	int GetNumItem(string item) {
