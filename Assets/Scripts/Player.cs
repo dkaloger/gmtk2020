@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
 {
 	public float _speed = 100;
 	Vector3 _velocity;
-
+	Vector3 _facing;
+	public float _plantDistance = 1.5f;
 	public health health;
 
 	public Dictionary<string, int> _inventory;
@@ -23,7 +24,13 @@ public class Player : MonoBehaviour
 		_inventory.Add("radishseeds", 5);
 		_inventory.Add("cornseeds", 5);
 		_inventory.Add("watermelonseeds", 5);
+		_facing = Vector3.forward;
 	}
+
+	public Vector3 GetPlantPosition()
+    {
+		return transform.position + _facing * _plantDistance;
+    }
 
 	void FixedUpdate() {
 	
@@ -31,6 +38,15 @@ public class Player : MonoBehaviour
 		if (health.stunned == false)
 		{
 			transform.Translate(_velocity * Time.fixedDeltaTime);
+			if (_velocity != Vector3.zero)
+			{
+				_facing = _velocity.normalized;
+				var model = gameObject.GetComponentInChildren<MeshRenderer>();
+				if (model)
+                {
+					model.transform.LookAt(transform.position + _facing);
+				}
+			}
 		}
 		
 	}
