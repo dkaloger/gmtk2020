@@ -15,6 +15,6 @@ public class show_health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        im.fillAmount = health.HP_now;
+        im.fillAmount = health.HP_now/100f;
     }
 }
