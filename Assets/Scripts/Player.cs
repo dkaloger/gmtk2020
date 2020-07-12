@@ -17,17 +17,6 @@ public class Player : MonoBehaviour
 	};
 	int _currentItemIndex;
 
-	[SerializeField]
-	protected Transform _model; //this is a reference to the child of the player and the model from Mixamo
-
-	//reference to the animator used to control animations.
-	Animator _animator;
-
-	private void Awake()
-	{
-		_animator = GetComponent<Animator>();
-	}
-
 	void Start() {
 		_currentItemIndex = 0;
 		_inventory = new Dictionary<string, int>();
@@ -52,24 +41,20 @@ public class Player : MonoBehaviour
 			if (_velocity != Vector3.zero)
 			{
 				_facing = _velocity.normalized;
-				//_model = gameObject.GetComponentInChildren<MeshRenderer>(); // Set this in inspector
-				if (_model)
+				var model = gameObject.GetComponentInChildren<MeshRenderer>();
+				if (model)
                 {
-					_model.LookAt(transform.position + _facing);
-
+					model.transform.LookAt(transform.position + _facing);
 				}
 			}
 		}
-
+		
 	}
 
 	public void OnMove(InputValue val) {
 		var move = val.Get<Vector2>();
 		var rigidbody = gameObject.GetComponent<Rigidbody>();
 		_velocity = new Vector3(move.x, 0, move.y) * _speed;
-
-		_animator.SetFloat("Speed", Mathf.Clamp(_velocity.magnitude, 0f, 1f)); //tells the animator how fast we are going
-		
 	}
 
 	int GetNumItem(string item) {
