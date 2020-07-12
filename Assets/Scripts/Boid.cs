@@ -27,7 +27,7 @@ public class Boid : MonoBehaviour
     protected float _avoidForce = 2f;
 
     [SerializeField]
-    protected Transform _target; 
+    public Transform _target;
 
     //The colliders around this plant we are trying to avoid.
     protected Collider[] _collidersInRange;
