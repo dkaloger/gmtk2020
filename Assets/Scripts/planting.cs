@@ -50,34 +50,34 @@ public class planting : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab) && p._inventory["radishseeds"] > 0)
         {
-            var plant_position = p.GetPlantPosition();
-            LayerMask mask = LayerMask.GetMask("Field");
-            print(""+transform.position+" "+plant_position);
-            bool can_plant = Physics.Raycast(plant_position+Vector3.up*5, Vector3.down, 10, mask, QueryTriggerInteraction.Collide);
-            if (can_plant)
-            {
+         //   var plant_position = p.GetPlantPosition();
+        //    LayerMask mask = LayerMask.GetMask("Field");
+        //    print(""+transform.position+" "+plant_position);
+        //    bool can_plant = Physics.Raycast(plant_position+Vector3.up*5, Vector3.down, 10, mask, QueryTriggerInteraction.Collide);
+          //  if (can_plant)
+          //  {
                 p._inventory["radishseeds"] = p._inventory["radishseeds"] - 1;
                 rand = Random.Range(1, 4);
-                //for testing only removed
-                // rand = 1;
-
+            //for testing only removed
+            // rand = 1;
+            player_pos.z+= 3;
                 if (rand == 1)
                 {
-                    Instantiate(watermelon, plant_position, Quaternion.identity);
+                    Instantiate(watermelon, player_pos, Quaternion.identity);
                 }
                 if (rand == 2)
                 {
-                    Instantiate(parsnip, plant_position, Quaternion.identity);
+                    Instantiate(parsnip, player_pos, Quaternion.identity);
                 }
                 if (rand == 3)
                 {
-                    Instantiate(corn, plant_position, Quaternion.identity);
+                    Instantiate(corn, player_pos, Quaternion.identity);
                 }
-            }
-            else
-            {
-                print("No field");
-            }
+         //   }
+         //   else
+          //  {
+          //      print("No field");
+          //  }
         }
 
     }
