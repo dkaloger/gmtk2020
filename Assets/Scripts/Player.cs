@@ -17,6 +17,14 @@ public class Player : MonoBehaviour
 	};
 	int _currentItemIndex;
 
+	//reference to the animator used to control animations.
+	Animator _animator;
+
+	private void Awake()
+	{
+		_animator = GetComponent<Animator>();
+	}
+
 	void Start() {
 		_currentItemIndex = 0;
 		_inventory = new Dictionary<string, int>();
@@ -45,16 +53,24 @@ public class Player : MonoBehaviour
 				if (model)
                 {
 					model.transform.LookAt(transform.position + _facing);
+
 				}
 			}
 		}
-		
+
 	}
 
 	public void OnMove(InputValue val) {
 		var move = val.Get<Vector2>();
 		var rigidbody = gameObject.GetComponent<Rigidbody>();
 		_velocity = new Vector3(move.x, 0, move.y) * _speed;
+
+		Vector3 animDir = new Vector3(_velocity.x, 0, _velocity.z);//based on velocity how do we want to blend walk anims
+		float forward = Vector3.Dot(animDir, transform.forward);
+		float strafe = Vector3.Dot(animDir, transform.right);
+
+		_animator.SetFloat("Speed", forward); //tells the animator how fast we are going
+		_animator.SetFloat("TurnSpeed", strafe);
 	}
 
 	int GetNumItem(string item) {
