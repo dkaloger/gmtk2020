@@ -10,21 +10,12 @@ public class Player : MonoBehaviour
 	Vector3 _facing;
 	public float _plantDistance = 1.5f;
 	public health health;
-	[SerializeField]
-	protected Transform _model;
-
-	Animator _animator;
 
 	public Dictionary<string, int> _inventory;
 	public static string[] ItemOrder = {
 		"water", "radishseeds", "cornseeds", "watermelonseeds"
 	};
 	int _currentItemIndex;
-
-	private void Awake()
-	{
-		_animator = GetComponent<Animator>();
-	}
 
 	void Start() {
 		_currentItemIndex = 0;
@@ -46,27 +37,24 @@ public class Player : MonoBehaviour
 		var rigidbody = gameObject.GetComponent<Rigidbody>();
 		if (health.stunned == false)
 		{
-			transform.Translate(_velocity * Time.fixedDeltaTime); 
-
+			transform.Translate(_velocity * Time.fixedDeltaTime);
 			if (_velocity != Vector3.zero)
 			{
 				_facing = _velocity.normalized;
-				//var model = gameObject.GetComponentInChildren<MeshRenderer>();
-				if (_model)
+				var model = gameObject.GetComponentInChildren<MeshRenderer>();
+				if (model)
                 {
-					_model.LookAt(transform.position + _facing);
+					model.transform.LookAt(transform.position + _facing);
 				}
 			}
 		}
+		
 	}
 
 	public void OnMove(InputValue val) {
 		var move = val.Get<Vector2>();
 		var rigidbody = gameObject.GetComponent<Rigidbody>();
 		_velocity = new Vector3(move.x, 0, move.y) * _speed;
-
-		//Debug.Log(Mathf.Clamp(_velocity.magnitude, 0f, 1f));
-		_animator.SetFloat("Speed", Mathf.Clamp(_velocity.magnitude, 0f, 1f));
 	}
 
 	int GetNumItem(string item) {
