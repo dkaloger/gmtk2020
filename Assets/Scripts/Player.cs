@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
-		
 	}
 
 	public void OnMove(InputValue val) {
