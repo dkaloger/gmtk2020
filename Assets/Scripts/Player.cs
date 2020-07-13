@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 			--numItem;
 			print("Used "+item+", you now have "+numItem);
 			_inventory[item] = numItem;
-			_animator.SetTrigger("Planting");
+			//_animator.SetTrigger("Planting");
 		}
 	}
 }
