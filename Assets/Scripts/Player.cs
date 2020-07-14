@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
-		
 	}
 
 	public void OnMove(InputValue val) {
@@ -113,6 +112,7 @@ public class Player : MonoBehaviour
 			--numItem;
 			print("Used "+item+", you now have "+numItem);
 			_inventory[item] = numItem;
+			//_animator.SetTrigger("Planting");
 		}
 	}
 }
