@@ -49,11 +49,12 @@ public class Player : MonoBehaviour
 			transform.Translate(_velocity * Time.fixedDeltaTime);
 			if (_velocity != Vector3.zero)
 			{
-				_facing = _velocity.normalized;
-				var model = gameObject.GetComponentInChildren<MeshRenderer>();
-				if (model)
-                {
-					model.transform.LookAt(transform.position + _facing);
+				_facing = _velocity.normalized + transform.position;
+				
+				if (_model)
+				{
+					_facing.y = _model.transform.position.y; //The witch isn't going to rotate up or down. 
+					_model.transform.LookAt(_facing);
 				}
 			}
 		}
@@ -112,7 +113,6 @@ public class Player : MonoBehaviour
 			--numItem;
 			print("Used "+item+", you now have "+numItem);
 			_inventory[item] = numItem;
-			//_animator.SetTrigger("Planting");
 		}
 	}
 }
