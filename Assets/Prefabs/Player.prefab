@@ -9,13 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6541842814828292569}
-  - component: {fileID: 6710056863966653022}
+  - component: {fileID: 4417114562464435047}
   - component: {fileID: 6541842814828292573}
   - component: {fileID: 6541842814828292574}
-  - component: {fileID: 6710056863966653021}
-  - component: {fileID: 4417114562464435047}
   - component: {fileID: 6541842814828292568}
-  - component: {fileID: 6710056863966653020}
   - component: {fileID: 2287838478133388683}
   m_Layer: 0
   m_Name: Player
@@ -39,24 +36,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6710056863966653022
-MonoBehaviour:
+--- !u!136 &4417114562464435047
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6541842814828292575}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a31e8dc11f37994390d06e8c5f220ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP_now: 0
-  HP_Max: 100
-  isplayer: 1
-  stunned: 0
-  t: 0
-  stun_time: 600
+  m_Radius: 2
+  m_Height: 9
+  m_Direction: 1
+  m_Center: {x: 0, y: 3.5, z: 0}
 --- !u!54 &6541842814828292573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71,7 +64,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &6541842814828292574
 MonoBehaviour:
@@ -87,49 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _plantDistance: 1.5
-  health: {fileID: 6710056863966653022}
+  health: {fileID: 0}
   _model: {fileID: 6443115836301601837}
---- !u!114 &6710056863966653021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541842814828292575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05a783256599a9b4a8af525b444e0368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plantsound: {fileID: 0}
-  watermelon: {fileID: 2249013267303624727, guid: c6acbe0b69639774099675ea2b196558,
-    type: 3}
-  parsnip: {fileID: 0}
-  corn: {fileID: 1603494396580563977, guid: b75b1cd12f931074dad4fc21102bfbb5, type: 3}
-  player: {fileID: 6541842814828292569}
-  player_pos: {x: 0, y: 0, z: 0}
-  q1_edge2: {x: 59.02, y: -1.91, z: 59.1}
-  q2_edge1: {x: 52.89, y: -1.91, z: 54.11}
-  q2_edge2: {x: 12.72, y: -1.91, z: 15.5}
-  q3_edge1: {x: 55.3, y: -1.91, z: 103.21}
-  q3_edge2: {x: 12.56, y: -1.91, z: 59.8}
-  my_q: 0
-  rand: 0
-  can_plant: 1
---- !u!136 &4417114562464435047
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541842814828292575}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 2
-  m_Height: 9
-  m_Direction: 1
-  m_Center: {x: 0, y: 3.5, z: 0}
 --- !u!114 &6541842814828292568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,24 +165,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6710056863966653020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541842814828292575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0fc668ec5ee01449408a3b62d30b00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  au: {fileID: 0}
-  my_money: 0
-  watermelonprice: 3
-  parsnipprice: 2
-  cornprice: 4
-  col: {fileID: 0}
 --- !u!95 &2287838478133388683
 Animator:
   serializedVersion: 3
@@ -244,7 +178,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: eb8a497ee62fca84f8c3b99e8cac9d1c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
