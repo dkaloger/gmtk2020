@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))] //Need this to animate player
+[RequireComponent(typeof(Rigidbody))] //Need this for physics
+[RequireComponent(typeof(CapsuleCollider))] //Need this for collision
 public class Player : MonoBehaviour
 {
 	public float _speed = 1;
@@ -10,21 +13,24 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	protected Transform _model; //this is a reference to the child of the player and the model from Mixamo
 
-	protected bool _hasWheelbarrow = true;
+	protected bool _hasWheelbarrow = false; //TODO: toggle this state when the player grabs the wheelbarrow.
 
 	//reference to the animator used to control animations.
 	Animator _animator;
 
+	Rigidbody _rb;
+
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
+		_rb = GetComponent<Rigidbody>();
 	}
 	void Start() {
 
 	}
 
 	void FixedUpdate() {
-	
+		
 	}
 
 	public void OnMove(InputValue val) {
