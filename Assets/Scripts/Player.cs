@@ -9,26 +9,36 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CapsuleCollider))] //Need this for collision
 public class Player : MonoBehaviour
 {
-	public float _speed = 1;
+	Rigidbody _rb;
+	Animator _animator;
 
 	[SerializeField]
-	protected Transform _model; //this is a reference to the child of the player and the model from Mixamo
+	protected float _speed = 1;
 
 	protected bool _hasWheelbarrow = false; //TODO: toggle this state when the player grabs the wheelbarrow. //Possibly make a getter/setter so we can change the animator states to match this.
 
 	Vector3 _facing = Vector3.forward;
 
+	[Header("Player Inventory")]
+
+	[SerializeField]
+	protected GameObject[] _inventory;
+
+	[Header("Player Reticle Settings")]
+
+	[SerializeField]
+	[Tooltip("This is that child object that is placed around the interaction target")]
+	protected Transform _playerInteractionReticle;
+
 	[SerializeField]
 	float _playerInteractionRange = 60f;
 
-	//reference to the animator used to control animations.
-	Animator _animator;
+	[SerializeField]
+	float _playerInteractionReticleRotationSpeed = 1f;
 
-	int _maxInteractionsToCheck = 10; // This determines how many colliders near the player can be checked to be made the "active" interaction item
-
-	Rigidbody _rb;
-
-	Transform _interactTarget;
+	int _maxInteractionsToCheck = 30; // This determines how many colliders near the player can be checked to be made the "active" interaction item
+	Transform _interactTarget; // Uses _maxInteractionsToCheck as array length
+	Collider[] _possibleInteractions; // Interaction Trigger near the player
 
 	private void Awake()
 	{
@@ -36,32 +46,46 @@ public class Player : MonoBehaviour
 		_rb = GetComponent<Rigidbody>();
 	}
 	void Start() {
-
+		_possibleInteractions = new Collider[_maxInteractionsToCheck];
 	}
 
-	void FixedUpdate() {
+	void Update() {
 
 		transform.rotation = Quaternion.LookRotation(_facing, Vector3.up);
 
-		Collider[] possibleInteractions = new Collider[_maxInteractionsToCheck];
-		int numInteractions = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 50, transform.position + Vector3.down * 50, _playerInteractionRange, possibleInteractions, LayerMask.GetMask("Player Interaction Triggers"));
-		Debug.Log(numInteractions);
+		CheckForIneractiveTargets();
+	}
 
-		_interactTarget = null; 
+	void CheckForIneractiveTargets()
+	{
+		Transform prevTarget = _interactTarget;
+		_interactTarget = null;
+		int numInteractions = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 50, transform.position + Vector3.down * 50, _playerInteractionRange, _possibleInteractions, LayerMask.GetMask("Player Interaction Triggers"));
 		Vector3 closestGoal = transform.position + transform.forward * (_playerInteractionRange / 2); //Using half the player interaction range as the target goal for what the player most wants to interact with.
 		float distance = Mathf.Infinity;
 		for (int i = 0; i < numInteractions; i++)
 		{
-			if (possibleInteractions[i].transform == transform)
+			if (_possibleInteractions[i].transform == transform)
 				continue; //We don't avoid ourself or the target.
 
 			//Get the closest interaction to the front of the player
-			if (Vector3.Distance(possibleInteractions[i].transform.position, closestGoal) < distance)
+			if (Vector3.Distance(_possibleInteractions[i].transform.position, closestGoal) < distance)
 			{
-				_interactTarget = possibleInteractions[i].transform;
-				distance = Vector3.Distance(possibleInteractions[i].transform.position, closestGoal);
+				_interactTarget = _possibleInteractions[i].transform;
+				distance = Vector3.Distance(_possibleInteractions[i].transform.position, closestGoal);
 			}
 		}
+
+		if (_interactTarget != prevTarget && _interactTarget != null) // new target object
+			_playerInteractionReticle.gameObject.SetActive(true);
+				
+		if (_interactTarget != null) // same target
+		{
+			_playerInteractionReticle.transform.Rotate(Vector3.up, _playerInteractionReticleRotationSpeed);
+			_playerInteractionReticle.transform.position = _interactTarget.position;
+		}
+		else
+			_playerInteractionReticle.gameObject.SetActive(false); 
 	}
 
 	public void OnMove(InputValue val) {
@@ -102,7 +126,16 @@ public class Player : MonoBehaviour
 	public void OnFire(InputValue val) {
 		if (val.Get<float>() == 0)
 			return;
-				
+
+		if (_interactTarget == null) //Player hasn't selected anything.
+			return;
+
+		_animator.SetTrigger("Plant");
+
+		if (_inventory.Length > 0)
+		{
+			Instantiate(_inventory[0], _interactTarget.position, Quaternion.identity);
+		}
 	}
 
 	/// <summary>

@@ -80,7 +80,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _model: {fileID: 6443115836301601837}
+  _inventory:
+  - {fileID: 1603494396580563977, guid: b75b1cd12f931074dad4fc21102bfbb5, type: 3}
+  _playerInteractionReticle: {fileID: 5950110218188819481}
+  _playerInteractionRange: 8
+  _playerInteractionReticleRotationSpeed: 2
 --- !u!114 &6541842814828292568
 MonoBehaviour:
   m_ObjectHideFlags: 0
