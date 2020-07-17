@@ -346,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871293611}
   m_LocalRotation: {x: 0.4241994, y: 0, z: 0, w: 0.90556884}
-  m_LocalPosition: {x: 64.9, y: 64.6, z: -2.6}
+  m_LocalPosition: {x: 71.59318, y: 10.566421, z: 25.31367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1793209060}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _moveOffset: {x: 0, y: 31.4, z: -31.4}
+  _moveOffset: {x: 0, y: 15, z: -10}
   _lookOffset: {x: 0, y: 10, z: 0}
   _smoothTime: 0.3
   _cameraSpeed: 2
@@ -1060,7 +1060,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2325019759932793339, guid: 5f2fc45b851ef1043a4498f1b355d893, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f2fc45b851ef1043a4498f1b355d893, type: 3}
 --- !u!1 &1855604015
 GameObject:

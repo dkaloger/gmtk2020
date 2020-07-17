@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8270091326895035859}
   - component: {fileID: 427568108219341229}
   - component: {fileID: 1121206990576086910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 2637286613439571156}
   - component: {fileID: 1952097791620611258}
   - component: {fileID: 2602591425355989135}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 3260428322209786174}
   - component: {fileID: 1092385779139282490}
   - component: {fileID: 4959544034962071736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 3899289700168958689}
   - component: {fileID: 6561696145520032570}
   - component: {fileID: 6592288330919210187}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 1308738428499842745}
   - component: {fileID: 3660272322824805057}
   - component: {fileID: 128633292225767122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 7127546087869113394}
   - component: {fileID: 1408674870713043858}
   - component: {fileID: 7749614101915294144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 6932870850633292284}
   - component: {fileID: 3211638344190073373}
   - component: {fileID: 617499121048163194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4511740825015390358}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Row
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 1445607876709958033}
   - component: {fileID: 983354023996993575}
   - component: {fileID: 1935546159302619150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 8915160062033351304}
   - component: {fileID: 4747511804348292437}
   - component: {fileID: 1890189255124182977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 2825355800246101193}
   - component: {fileID: 1616104305384947315}
   - component: {fileID: 2899201856088347928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 3269700810477011277}
   - component: {fileID: 3515503911163539871}
   - component: {fileID: 5248362817182490130}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
