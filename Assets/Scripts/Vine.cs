@@ -50,14 +50,16 @@ public class Vine : MonoBehaviour
     private Spline spline;
     private float rate = 0;
     private MeshBender meshBender;
+    internal List<GameObject> wayPoints = new List<GameObject>();
 
     [Header("Physics Settings")]
-
-    public List<GameObject> wayPoints = new List<GameObject>();
+    public bool disablePhysics = true;
 
     public GameObject segmentPrefab;
     public int segmentCount;
     public float segmentSpacing;
+    [Tooltip("Sending Rotations to the Spline can cause pinching in the mesh if you don't limit the rotation properly. Possible physics joint for that?")]
+    public bool sendRotation = false;
 
     [Header("Visual Settings")]
     public Mesh mesh;
@@ -93,6 +95,16 @@ public class Vine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rate += Time.deltaTime / DurationInSecond;
+        if (rate < 1)
+        {
+            Contort();
+            //rate--; //restart anim.
+        }
+
+        if (disablePhysics)
+            return;
+
         if (_toUpdate)
         {
             _toUpdate = false;
@@ -100,13 +112,6 @@ public class Vine : MonoBehaviour
             UpdateSpline();
         }
         UpdateNodes();
-
-        rate += Time.deltaTime / DurationInSecond;
-        if (rate < 1)
-        {
-            Contort();
-            //rate--; //restart anim.
-        }
     }
 
     /// <summary>
@@ -121,7 +126,8 @@ public class Vine : MonoBehaviour
             if (Vector3.Distance(node.Position, transform.InverseTransformPoint(wayPoint.transform.position)) > 0.001f)
             {
                 node.Position = transform.InverseTransformPoint(wayPoint.transform.position);
-                node.Up = wayPoint.transform.up;
+                if (sendRotation)
+                    node.Up = wayPoint.transform.up;
             }
         }
     }
@@ -239,5 +245,29 @@ public class Vine : MonoBehaviour
             localSpacing += segmentSpacing;
         }
         UOUtility.Destroy(joint);
+    }
+}
+
+//not working...
+[CustomEditor(typeof(Vine))]
+public class MyScriptEditor : Editor
+{
+    void OnInspectorGUI()
+    {
+        Vine vine = target as Vine;
+
+        vine.disablePhysics = GUILayout.Toggle(vine.disablePhysics, "Flag");
+
+        if (vine.disablePhysics)
+		{
+            //vine.segmentPrefab = EditorGUILayout.
+            vine.segmentCount = EditorGUILayout.IntField(vine.segmentCount);
+            vine.segmentSpacing = EditorGUILayout.FloatField(vine.segmentSpacing);
+                //public GameObject segmentPrefab;
+                //public int segmentCount;
+                //public float segmentSpacing;
+        }
+            //vine.i = EditorGUILayout.IntSlider("I field:", vine.i, 1, 100);
+
     }
 }
