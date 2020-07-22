@@ -17,9 +17,9 @@ TagManager:
   - 
   - 
   - Player Interaction Triggers
-  - 
-  - 
-  - 
+  - Ignore Player Collision
+  - Player
+  - PlantBlockCollider
   - 
   - 
   - 
