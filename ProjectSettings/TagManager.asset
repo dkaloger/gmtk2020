@@ -6,6 +6,7 @@ TagManager:
   tags:
   - plant
   - attackable-plant
+  - ground
   layers:
   - Default
   - TransparentFX
@@ -15,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - Field
-  - 
-  - 
-  - 
+  - Player Interaction Triggers
+  - Ignore Player Collision
+  - Player
+  - PlantBlockCollider
   - 
   - 
   - 

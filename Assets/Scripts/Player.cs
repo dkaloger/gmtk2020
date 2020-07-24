@@ -1,87 +1,125 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))] //Need this to animate player
+[RequireComponent(typeof(Rigidbody))] //Need this for physics
+[RequireComponent(typeof(CapsuleCollider))] //Need this for collision
 public class Player : MonoBehaviour
 {
-	public float _speed = 100;
-	Vector3 _velocity;
-	Vector3 _facing;
-	public float _plantDistance = 1.5f;
-	public health health;
+	Rigidbody _rb;
+	Animator _animator;
 
-	public Dictionary<string, int> _inventory;
-	public static string[] ItemOrder = {
-		"water", "radishseeds", "cornseeds", "watermelonseeds"
-	};
-	int _currentItemIndex;
+	[SerializeField]
+	protected float _speed = 1;
 
+	protected bool _hasWheelbarrow = false; //TODO: toggle this state when the player grabs the wheelbarrow. //Possibly make a getter/setter so we can change the animator states to match this.
+
+	Vector3 _facing = Vector3.forward;
+
+	[Header("Player Inventory")]
+
+	[SerializeField]
+	protected GameObject[] _inventory;
+
+	[Header("Player Reticle Settings")]
+
+	[SerializeField]
+	[Tooltip("This is that child object that is placed around the interaction target")]
+	protected Transform _playerInteractionReticle;
+
+	[SerializeField]
+	float _playerInteractionRange = 60f;
+
+	[SerializeField]
+	float _playerInteractionReticleRotationSpeed = 1f;
+
+	int _maxInteractionsToCheck = 30; // This determines how many colliders near the player can be checked to be made the "active" interaction item
+	Transform _interactTarget; // Uses _maxInteractionsToCheck as array length
+	Collider[] _possibleInteractions; // Interaction Trigger near the player
+
+	private void Awake()
+	{
+		_animator = GetComponent<Animator>();
+		_rb = GetComponent<Rigidbody>();
+	}
 	void Start() {
-		_currentItemIndex = 0;
-		_inventory = new Dictionary<string, int>();
-		_inventory.Add("water", 5);
-		_inventory.Add("radishseeds", 5);
-		_inventory.Add("cornseeds", 5);
-		_inventory.Add("watermelonseeds", 5);
-		_facing = Vector3.forward;
+		_possibleInteractions = new Collider[_maxInteractionsToCheck];
 	}
 
-	public Vector3 GetPlantPosition()
-    {
-		return transform.position + _facing * _plantDistance;
-    }
+	void Update() {
 
-	void FixedUpdate() {
-	
-		var rigidbody = gameObject.GetComponent<Rigidbody>();
-		if (health.stunned == false)
+		transform.rotation = Quaternion.LookRotation(_facing, Vector3.up);
+
+		CheckForIneractiveTargets();
+	}
+
+	void CheckForIneractiveTargets()
+	{
+		Transform prevTarget = _interactTarget;
+		_interactTarget = null;
+		int numInteractions = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 50, transform.position + Vector3.down * 50, _playerInteractionRange, _possibleInteractions, LayerMask.GetMask("Player Interaction Triggers"));
+		Vector3 closestGoal = transform.position + transform.forward * (_playerInteractionRange / 2); //Using half the player interaction range as the target goal for what the player most wants to interact with.
+		float distance = Mathf.Infinity;
+		PlayerInteraction p;
+		for (int i = 0; i < numInteractions; i++)
 		{
-			transform.Translate(_velocity * Time.fixedDeltaTime);
-			if (_velocity != Vector3.zero)
+			if (!_possibleInteractions[i].TryGetComponent<PlayerInteraction>(out p))
+				Debug.LogError("An object the player is going to interact with needs to inherit from PlayerInteraction so universal properties can be shared.");
+			
+			if (_possibleInteractions[i].transform == transform || !_possibleInteractions[i].enabled || !p.active)
+				continue; //We don't want to target ourself or any disabled colliders or this interaction has been disabled.
+
+			//Get the closest interaction to the front of the player
+			if (Vector3.Distance(_possibleInteractions[i].transform.position, closestGoal) < distance)
 			{
-				_facing = _velocity.normalized;
-				var model = gameObject.GetComponentInChildren<MeshRenderer>();
-				if (model)
-                {
-					model.transform.LookAt(transform.position + _facing);
-				}
+				_interactTarget = _possibleInteractions[i].transform;
+				distance = Vector3.Distance(_possibleInteractions[i].transform.position, closestGoal);
 			}
 		}
-		
+
+		if (_interactTarget != prevTarget && _interactTarget != null) // new target object
+			_playerInteractionReticle.gameObject.SetActive(true);
+				
+		if (_interactTarget != null) // same target
+		{
+			_playerInteractionReticle.transform.Rotate(Vector3.up, _playerInteractionReticleRotationSpeed);
+			_playerInteractionReticle.transform.position = _interactTarget.position;
+		}
+		else
+			_playerInteractionReticle.gameObject.SetActive(false); 
 	}
 
 	public void OnMove(InputValue val) {
-		var move = val.Get<Vector2>();
-		var rigidbody = gameObject.GetComponent<Rigidbody>();
-		_velocity = new Vector3(move.x, 0, move.y) * _speed;
-	}
-
-	int GetNumItem(string item) {
-		if (!_inventory.ContainsKey(item)) {
-			print("No such item "+item);
-			return 0;
+		Vector2 move = val.Get<Vector2>();
+		
+		if (_hasWheelbarrow) //move with wheelbarrow
+		{
+			_animator.SetFloat("Horizontal", move.x);
+			_animator.SetFloat("Vertical", Mathf.Clamp(move.y, 0f, 1f)); //Clamp move.y because the player can't move backwards with the wheelbarrow
 		}
-		return _inventory[item];
-	}
-
-	void CycleItem(int delta) {
-		_currentItemIndex = (_currentItemIndex + delta) % ItemOrder.Length;
-		_currentItemIndex = (_currentItemIndex + ItemOrder.Length) % ItemOrder.Length;
-
-		var item = ItemOrder[_currentItemIndex];
-		var numItem = GetNumItem(item);
-		print("Select "+item+", you have "+numItem);
+		else //Move normal
+		{
+			if (move.sqrMagnitude > 0f) 
+				_facing = new Vector3(move.x, 0, move.y); //only update facing if the player is inputing movement. This prevents the player from looking at 0,0,0 when no input is being given.
+			_animator.SetFloat("Speed", Mathf.Clamp(move.magnitude, 0f, 1f)); //tells the animator how fast we are going
+		}	
 	}
 
 	public void OnNextItem(InputValue val) {
 		if (val.Get<float>() > 0)
-			CycleItem(1);
+		{
+
+		}
 	}
 
 	public void OnPrevItem(InputValue val) {
 		if (val.Get<float>() > 0)
-			CycleItem(-1);
+		{
+
+		}
 	}
 
 	public void OnScrollWheel(InputValue val) {
@@ -93,15 +131,31 @@ public class Player : MonoBehaviour
 		if (val.Get<float>() == 0)
 			return;
 
-		var item = ItemOrder[_currentItemIndex];
-		var numItem = GetNumItem(item);
+		if (_interactTarget == null) //Player hasn't selected anything.
+			return;
+		
+		//TODO: This plant animation's root drops a bit lower than the other animations... Fix root drop.
+		_animator.SetTrigger("Plant");
+		_interactTarget.GetComponent<PlayerInteraction>().active = false;
 
-		if (numItem == 0) {
-			print("Out of "+item);
-		} else {
-			--numItem;
-			print("Used "+item+", you now have "+numItem);
-			_inventory[item] = numItem;
+		if (_inventory.Length > 0)
+		{
+			Instantiate(_inventory[0], _interactTarget.position, Quaternion.identity);
+		}
+	}
+
+	/// <summary>
+	/// Draw Player Gizmos
+	/// </summary>
+	void OnDrawGizmosSelected()
+	{
+		//Draw a wire sphere representing the player's interaction range.
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere(transform.position, _playerInteractionRange);
+
+		if(_interactTarget != null)
+		{
+			Gizmos.DrawSphere(_interactTarget.position, 2f);
 		}
 	}
 }
