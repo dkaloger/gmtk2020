@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,11 +14,27 @@ public class Player : MonoBehaviour
 	Animator _animator;
 
 	[SerializeField]
+	Transform rightHand = null;
+	[SerializeField]
+	Transform leftHand = null;
+	Transform _ikTarget = null; //supposed to be the weed
+	Transform _leftHandObj = null; //supposed to be the weed
+	Transform _lookObj = null; //TODO: Implement.
+
+	[Header("Player Control")]
+
+	[SerializeField]
 	protected float _speed = 1;
 
 	protected bool _hasWheelbarrow = false; //TODO: toggle this state when the player grabs the wheelbarrow. //Possibly make a getter/setter so we can change the animator states to match this.
 
 	Vector3 _facing = Vector3.forward;
+
+	[SerializeField]
+	protected float _timeBetweenTrips = 10f;
+	private float _tripTimer = 0f;
+
+	protected bool _canBeTripped = true;
 
 	[Header("Player Inventory")]
 
@@ -52,6 +69,23 @@ public class Player : MonoBehaviour
 	void Update() {
 
 		transform.rotation = Quaternion.LookRotation(_facing, Vector3.up);
+
+		if (_ikTarget)
+		{
+			_ikTarget.position = rightHand.position;
+			_ikTarget.rotation = rightHand.rotation;
+		}
+
+		if(!_canBeTripped)
+		{
+			_tripTimer += Time.deltaTime;
+
+			if (_tripTimer > _timeBetweenTrips)
+			{
+				_tripTimer = 0f;
+				_canBeTripped = true;
+			}
+		}
 
 		CheckForIneractiveTargets();
 	}
@@ -89,7 +123,7 @@ public class Player : MonoBehaviour
 			_playerInteractionReticle.transform.position = _interactTarget.position;
 		}
 		else
-			_playerInteractionReticle.gameObject.SetActive(false); 
+			_playerInteractionReticle.gameObject.SetActive(false);
 	}
 
 	public void OnMove(InputValue val) {
@@ -133,14 +167,93 @@ public class Player : MonoBehaviour
 
 		if (_interactTarget == null) //Player hasn't selected anything.
 			return;
-		
-		//TODO: This plant animation's root drops a bit lower than the other animations... Fix root drop.
-		_animator.SetTrigger("Plant");
-		_interactTarget.GetComponent<PlayerInteraction>().active = false;
 
-		if (_inventory.Length > 0)
+		if (_interactTarget.TryGetComponent<WeedInteraction>(out var weed)) //weed a weed.
 		{
-			Instantiate(_inventory[0], _interactTarget.position, Quaternion.identity);
+			_ikTarget = weed.Weed();
+			// We locked the rigid body of the base vineRB so it would stay at the origin of the plant. Now we need to unfreeze it so it can move again.
+			_ikTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+			//_ikTarget.SetParent(rightHand);
+			_animator.SetTrigger("Weed");
+		}
+		else //plant a plant
+		{
+			_animator.SetTrigger("Plant");
+			_interactTarget.GetComponent<PlayerInteraction>().active = false;
+
+			if (_inventory.Length > 0)
+				Instantiate(_inventory[0], _interactTarget.position, Quaternion.identity);
+		}
+
+		//TODO: This plant animation's root drops a bit lower than the other animations... Fix root drop.
+	}
+
+	//Called as an animation event from the pull plant animation when the player lets go during a toss of their right hand.
+	public IEnumerator DiscardWeed()
+	{
+		GameObject vineParent = null;
+		if (_ikTarget != null)
+			vineParent = _ikTarget.parent.parent.gameObject; //vineParent > vineMesh > vinePysics, Collision, & IK... this is why the: parent.parent
+		else
+			yield break;
+
+		//ikTarget is always locked to the player's hand but we want that to be free, so we're unlocking it here.
+		_ikTarget = null;
+
+		if (vineParent == null)
+			yield break;
+
+		for (int i = 0; i < 40; i++) //i is 40 for 4 seconds updated 10 times per second:
+		{
+			SpringJoint[] joints = vineParent.GetComponentsInChildren<SpringJoint>();
+			foreach (SpringJoint spring in joints)
+			{
+				spring.spring += 2f;
+			}
+			//weed spings should tighten significantly here.
+			yield return new WaitForSeconds(0.1f);
+		}
+
+		vineParent.transform.position = new Vector3(9999f, 9999f, 9999f);
+		Destroy(vineParent, .1f);
+
+		yield break;
+	}
+
+	public void OnCollisionEnter(Collision collision)
+	{
+		if(_canBeTripped && collision.transform.tag == "Vine")
+		{
+			//We've collided with a vine
+			_animator.SetTrigger("Trip");
+			_canBeTripped = false;
+		}
+	}
+
+	//a callback for calculating IK
+	public void OnAnimatorIK()
+	{
+		if (!_animator) // we want to transition these weights
+			return;
+
+		//IKStrengthCurve is a curve created in the pull weed animation and set through the animation controller. We can get it for a custom IK strength built for the animation.
+		float ikStrength = _animator.GetFloat("IKStrengthCurve");
+
+		// Set the right hand target position and rotation, if one has been assigned
+		if (_ikTarget != null)
+		{
+			_animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikStrength);
+			_animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0); //was ikStrength
+			_animator.SetIKPosition(AvatarIKGoal.RightHand, _ikTarget.position);
+			_animator.SetIKRotation(AvatarIKGoal.RightHand, _ikTarget.rotation);
+
+			_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikStrength);
+			_animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0); //was ikStrength
+			_animator.SetIKPosition(AvatarIKGoal.LeftHand, _ikTarget.position);
+			_animator.SetIKRotation(AvatarIKGoal.LeftHand, _ikTarget.rotation);
+
+			_animator.SetLookAtWeight(1); // we want to look at the weed
+			_animator.SetLookAtPosition(_ikTarget.position); //_lookObj
 		}
 	}
 
@@ -149,6 +262,8 @@ public class Player : MonoBehaviour
 	/// </summary>
 	void OnDrawGizmosSelected()
 	{
+		return;
+
 		//Draw a wire sphere representing the player's interaction range.
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, _playerInteractionRange);

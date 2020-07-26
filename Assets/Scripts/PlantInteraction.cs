@@ -9,18 +9,6 @@ public class PlantInteraction : PlayerInteraction
     /// </summary>
     int _count;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 	public void OnTriggerEnter(Collider other)
 	{
         _count++;
@@ -34,11 +22,4 @@ public class PlantInteraction : PlayerInteraction
         if (_count <= 0)
             active = true;
 	}
-
-	void OnDrawGizmos()
-	{
-        //Set the color
-        Gizmos.color = active ? Color.green : Color.red;
-        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider>().size);
-    }
 }

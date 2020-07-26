@@ -25,7 +25,6 @@ using UnityEngine;
 public class Vine : MonoBehaviour
 {
     private bool _toUpdate = false;
-    private GameObject firstSegment;
     private GameObject _generatedPhysicsGO;
     private GameObject GeneratedPhysicsGO
     {
@@ -40,8 +39,6 @@ public class Vine : MonoBehaviour
             return _generatedPhysicsGO;
         }
     }
-
-    float _splineToRigidBodyWeight = 0f; //Maybe interpolate between the spline position to the rigidbody?
 
     /// <summary>
     /// This is the child that the rendered mesh is in
@@ -71,11 +68,42 @@ public class Vine : MonoBehaviour
 
     public float DurationInSecond;
 
+    protected WeedInteraction _weed;
+
+    public bool reverseAnimation = false;
+
+    [Header("Randomization")]
+    public bool randomizeOnStart = false;
+
+    [Range(0, 5)]
+    [SerializeField]
+    [Tooltip("A 360 random direction is chosen, and this is how far each spline node will move in that direction.")]
+    protected float _maxPositionOffset = 0f;
+
+    [Range(0,1)]
+    [SerializeField]
+    [Tooltip("0 = 0%, 1 = 100$, .5 = 50%")]
+    protected float _probabilityOfSegmentSpawningNewVine = .2f;
 
 	// Start is called before the first frame update
 	void Start()
     {
+        _weed = transform.parent.GetComponentInChildren<WeedInteraction>();
 
+        if (!_weed && !disablePhysics)
+            Debug.LogError("No weed interaction found.");
+
+        if(randomizeOnStart)
+		{
+            if (!spline)
+                spline = GetComponent<Spline>();
+            
+            foreach(SplineNode node in spline.nodes)
+			{
+                node.Position += UnityEngine.Random.onUnitSphere * _maxPositionOffset;
+                node.Direction += UnityEngine.Random.onUnitSphere; //test rand dir
+			}
+        }
     }
 
     private void OnEnable()
@@ -95,11 +123,18 @@ public class Vine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rate += Time.deltaTime / DurationInSecond;
-        if (rate < 1)
+        if(reverseAnimation)
+		{
+            rate -= Time.deltaTime / DurationInSecond;
+        }
+        else
+		{
+            rate += Time.deltaTime / DurationInSecond;
+        }
+        
+        if (rate > 0 && rate < 1)
         {
             Contort();
-            //rate--; //restart anim.
         }
 
         if (disablePhysics)
@@ -189,6 +224,7 @@ public class Vine : MonoBehaviour
             typeof(MeshBender));
 
         generatedModelGameObject.GetComponent<MeshRenderer>().material = material;
+        //generatedModelGameObject.tag = "Vine";
 
         meshBender = generatedModelGameObject.GetComponent<MeshBender>();
         spline = GetComponent<Spline>();
@@ -211,14 +247,16 @@ public class Vine : MonoBehaviour
         {
             GameObject seg = UOUtility.Instantiate(segmentPrefab, GeneratedPhysicsGO.transform);
             seg.transform.Translate(0, 0, localSpacing);
+            seg.tag = "Vine";
 
             Rigidbody segRB = seg.GetComponent<Rigidbody>();
             // we fix the first segment so that the vine won't fall
             if (i == 0)
             {
-                firstSegment = seg;
                 segRB.constraints = RigidbodyConstraints.FreezePosition;
                 seg.GetComponent<Collider>().enabled = false; //disable the collider on the first/center of the plant.
+
+                _weed.vinesToPickBeforeDestorying.Enqueue(seg.transform); //store the first physics segment so the player can grab it with IK
             }
             else if (i == Mathf.Ceil(segmentCount/2))
 			{
@@ -245,29 +283,5 @@ public class Vine : MonoBehaviour
             localSpacing += segmentSpacing;
         }
         UOUtility.Destroy(joint);
-    }
-}
-
-//not working...
-[CustomEditor(typeof(Vine))]
-public class MyScriptEditor : Editor
-{
-    void OnInspectorGUI()
-    {
-        Vine vine = target as Vine;
-
-        vine.disablePhysics = GUILayout.Toggle(vine.disablePhysics, "Flag");
-
-        if (vine.disablePhysics)
-		{
-            //vine.segmentPrefab = EditorGUILayout.
-            vine.segmentCount = EditorGUILayout.IntField(vine.segmentCount);
-            vine.segmentSpacing = EditorGUILayout.FloatField(vine.segmentSpacing);
-                //public GameObject segmentPrefab;
-                //public int segmentCount;
-                //public float segmentSpacing;
-        }
-            //vine.i = EditorGUILayout.IntSlider("I field:", vine.i, 1, 100);
-
     }
 }

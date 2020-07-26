@@ -22,7 +22,7 @@ namespace SplineMesh {
                 position.x = value.x;
                 position.y = value.y;
                 position.z = value.z;
-                if(Changed != null) Changed(this, EventArgs.Empty);
+				if (Changed != null) Changed(this, EventArgs.Empty);
             }
         }
         [SerializeField]

@@ -6,8 +6,6 @@ public class PlayerInteraction : MonoBehaviour
 {
     public bool active = true;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +16,12 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnDrawGizmos()
+    {
+        //Set the color
+        Gizmos.color = active ? Color.green : Color.red;
+        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider>().size);
     }
 }
