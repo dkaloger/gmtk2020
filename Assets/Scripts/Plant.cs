@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using ByTheTale.StateMachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plant : MonoBehaviour
+public class Plant : MachineBehaviour
 {
     protected GameObject _player;
 
@@ -40,5 +41,26 @@ public class Plant : MonoBehaviour
     void Grow()
 	{
         transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, _speed * Time.deltaTime);
+    }
+
+	public override void AddStates()
+	{
+		throw new System.NotImplementedException();
+
+        //TODO: Universal states I can think of:
+
+        // 1. SeedState
+        // 2. GrowingState
+        // 3a. Ready
+        // 3b. Monster
+        // 4. Rotten
+
+        AddState<SeedState>();
+        AddState<GrowingState>();
+        AddState<ReadyState>();
+        AddState<MonsterState>();
+        AddState<RottenState>();
+
+        SetInitialState<SeedState>();
     }
 }
