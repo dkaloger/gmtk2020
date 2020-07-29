@@ -13,4 +13,11 @@ public class SeedState : ByTheTale.StateMachine.State
         
     }
 
+    /// <summary>
+    /// Goes directly to the growing state.
+    /// </summary>
+    public void Water()
+	{
+        machine.ChangeState<GrowingState>();
+	}
 }

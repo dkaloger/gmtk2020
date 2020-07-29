@@ -6,8 +6,17 @@ namespace ByTheTale.StateMachine
     [System.Serializable]
     public abstract class State : StateInterface
     {
+        /// <summary>
+        /// Called during the Monobehavior Update
+        /// </summary>
         public virtual void Execute() { }
+        /// <summary>
+        /// Called during the Monobehavior FixedUpdate
+        /// </summary>
         public virtual void PhysicsExecute() { }
+        /// <summary>
+        /// Called during the Monobehavior LateUpdate
+        /// </summary>
         public virtual void PostExecute() { }
 
         public virtual void OnCollisionEnter(UnityEngine.Collision collision)

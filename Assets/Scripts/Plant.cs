@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//[RequireComponent(typeof(PlayerInteraction)]
 public class Plant : MachineBehaviour
 {
     protected GameObject _player;
@@ -45,16 +46,6 @@ public class Plant : MachineBehaviour
 
 	public override void AddStates()
 	{
-		throw new System.NotImplementedException();
-
-        //TODO: Universal states I can think of:
-
-        // 1. SeedState
-        // 2. GrowingState
-        // 3a. Ready
-        // 3b. Monster
-        // 4. Rotten
-
         AddState<SeedState>();
         AddState<GrowingState>();
         AddState<ReadyState>();
