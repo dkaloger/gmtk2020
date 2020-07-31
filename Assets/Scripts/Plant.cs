@@ -3,52 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(PlayerInteraction)]
+[RequireComponent(typeof(PlantInteraction))]
 public class Plant : MachineBehaviour
 {
     protected GameObject _player;
 
-    [SerializeField]
-    [Range(0f, 1f)]
-    protected float _startingSize;
+    [Header("Plant Settings")]
 
-    [SerializeField]
-    protected float _timeTillFullyGrown = 30f;
-    float _growTimer = 0;
-    float _speed;
+    [Range(0f, 1f)]
+    public float startingSize = 0f;
+
+    public float timeTillFullyGrown = 30f;
+
+    [Header("Watering Settings")]
+
+    [Range(0, 1)]
+    [Tooltip("0 = 0% chance monster, 0.5 = 50% chance monster, 1 = 100% chance monster")]
+    public float corruption = 0f;
+
+    [Tooltip("corruption only increases when watered.")]
+    public float corruptionGrowthPerSecond = 0.03f;
+
+    [Range(0f, 1f)]
+    [Tooltip("This is additive to it's normal growth-rate")]
+    public float growthRateWatering = 0.02f;
 
 	private void Awake()
 	{
         _player = GameObject.FindGameObjectWithTag("Player");
-        _speed = 1 / _timeTillFullyGrown;
     }
 
-	// Start is called before the first frame update
-	void Start()
+	public override void Start()
     {
-        transform.localScale = Vector3.one * _startingSize;
+        base.Start();
+
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (_growTimer <= _timeTillFullyGrown)
+        base.Update();
+
+    }
+
+	public override void OnTriggerStay(Collider collider)
+	{
+		base.OnTriggerStay(collider);
+
+        //if we are colliding with the trigger for the cloud, and it's raining
+        //then Water()
+        
+	}
+
+	public void Water()
+	{
+        corruption += corruptionGrowthPerSecond * Time.deltaTime;
+        transform.localScale += Vector3.one * growthRateWatering * Time.deltaTime;
+
+        if (IsCurrentState<SeedState>())
 		{
-            _growTimer += Time.deltaTime;
-            Grow();
+            ((SeedState)currentState).Water();
 		}
     }
 
-    void Grow()
-	{
-        transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, _speed * Time.deltaTime);
-    }
-
-	public override void AddStates()
+    public override void AddStates()
 	{
         AddState<SeedState>();
         AddState<GrowingState>();
-        AddState<ReadyState>();
+        AddState<HarvestState>();
         AddState<MonsterState>();
         AddState<RottenState>();
 

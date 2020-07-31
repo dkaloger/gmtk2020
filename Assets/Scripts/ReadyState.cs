@@ -5,12 +5,15 @@ using UnityEngine;
 /// <summary>
 /// Plant is ready to be picked and harvested for profit.
 /// </summary>
-public class ReadyState : ByTheTale.StateMachine.State
+public class HarvestState : ByTheTale.StateMachine.State
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public override void OnCollisionEnter(Collision collision)
+	{
+		base.OnCollisionEnter(collision);
+
+		//when we collide with the player we should be collected for all the money
+
+		
+	}
 
 }

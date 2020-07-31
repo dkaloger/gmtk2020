@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public delegate void InteractCallback(Transform playerInteractTarget);
+
 [RequireComponent(typeof(Animator))] //Need this to animate player
 [RequireComponent(typeof(Rigidbody))] //Need this for physics
 [RequireComponent(typeof(CapsuleCollider))] //Need this for collision
@@ -17,7 +19,7 @@ public class Player : MonoBehaviour
 	Transform rightHand = null;
 	[SerializeField]
 	Transform leftHand = null;
-	Transform _ikTarget = null; //supposed to be the weed
+	public Transform ikTarget = null; //supposed to be the weed
 	Transform _leftHandObj = null; //supposed to be the weed
 	Transform _lookObj = null; //TODO: Implement.
 
@@ -54,8 +56,8 @@ public class Player : MonoBehaviour
 	float _playerInteractionReticleRotationSpeed = 1f;
 
 	int _maxInteractionsToCheck = 30; // This determines how many colliders near the player can be checked to be made the "active" interaction item
-	Transform _interactTarget; // Uses _maxInteractionsToCheck as array length
-	Collider[] _possibleInteractions; // Interaction Trigger near the player
+	Transform _interactTarget; // Interaction trigger itself
+	Collider[] _possibleInteractions; // Uses _maxInteractionsToCheck as array length
 
 	private void Awake()
 	{
@@ -70,10 +72,10 @@ public class Player : MonoBehaviour
 
 		transform.rotation = Quaternion.LookRotation(_facing, Vector3.up);
 
-		if (_ikTarget)
+		if (ikTarget)
 		{
-			_ikTarget.position = rightHand.position;
-			_ikTarget.rotation = rightHand.rotation;
+			ikTarget.position = rightHand.position;
+			ikTarget.rotation = rightHand.rotation;
 		}
 
 		if(!_canBeTripped)
@@ -161,54 +163,61 @@ public class Player : MonoBehaviour
 		print(scroll);
 	}
 
-	public void OnFire(InputValue val) {
+	public void OnFire(InputValue val) 
+	{
 		if (val.Get<float>() == 0)
 			return;
 
 		if (_interactTarget == null) //Player hasn't selected anything.
 			return;
 
-		if (_interactTarget.TryGetComponent<WeedInteraction>(out var weed)) //weed a weed.
+		//TODO: don't check for components, implement a callback or event of some kind. Move this logic where it should go: into the interaction classes!
+		if (_interactTarget.TryGetComponent(out PlayerInteraction interact)) //weed a weed.
 		{
-			_ikTarget = weed.Weed();
-			// We locked the rigid body of the base vineRB so it would stay at the origin of the plant. Now we need to unfreeze it so it can move again.
-			_ikTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-			//_ikTarget.SetParent(rightHand);
-			_animator.SetTrigger("Weed");
-		}
-		else //plant a plant
-		{
-			_animator.SetTrigger("Plant");
-			_interactTarget.GetComponent<PlayerInteraction>().active = false;
-
-			if (_inventory.Length > 0)
-				Instantiate(_inventory[0], _interactTarget.position, Quaternion.identity);
+			interact.Interact();
 		}
 
-		//TODO: This plant animation's root drops a bit lower than the other animations... Fix root drop.
+		//What did we just interact with?
+		switch (interact)
+		{
+			case null:
+				Debug.LogError("PlayerInteraction returned null.");
+				break;
+			case WeedInteraction _:
+				_animator.SetTrigger("Weed");
+				break;
+			case PlantInteraction _:
+				_animator.SetTrigger("Plant");
+				break;
+			default:
+				throw new System.NotImplementedException();
+		}
 	}
 
 	//Called as an animation event from the pull plant animation when the player lets go during a toss of their right hand.
 	public IEnumerator DiscardWeed()
 	{
+		Debug.Log("Discard Weed Method Called.");
 		GameObject vineParent = null;
-		if (_ikTarget != null)
-			vineParent = _ikTarget.parent.parent.gameObject; //vineParent > vineMesh > vinePysics, Collision, & IK... this is why the: parent.parent
+
+		if (ikTarget != null)
+			vineParent = ikTarget.parent.parent.gameObject; //vineParent > vineMesh > vinePysics, Collision, & IK... this is why the: parent.parent
 		else
 			yield break;
 
 		//ikTarget is always locked to the player's hand but we want that to be free, so we're unlocking it here.
-		_ikTarget = null;
+		ikTarget = null;
 
 		if (vineParent == null)
 			yield break;
 
+		//TODO: This should be inside the weed interaction function. Get it out of player.
 		for (int i = 0; i < 40; i++) //i is 40 for 4 seconds updated 10 times per second:
 		{
 			SpringJoint[] joints = vineParent.GetComponentsInChildren<SpringJoint>();
 			foreach (SpringJoint spring in joints)
 			{
-				spring.spring += 2f;
+				spring.spring += 8f;
 			}
 			//weed spings should tighten significantly here.
 			yield return new WaitForSeconds(0.1f);
@@ -216,6 +225,7 @@ public class Player : MonoBehaviour
 
 		vineParent.transform.position = new Vector3(9999f, 9999f, 9999f);
 		Destroy(vineParent, .1f);
+		Debug.Log("Destory Vine");
 
 		yield break;
 	}
@@ -240,20 +250,20 @@ public class Player : MonoBehaviour
 		float ikStrength = _animator.GetFloat("IKStrengthCurve");
 
 		// Set the right hand target position and rotation, if one has been assigned
-		if (_ikTarget != null)
+		if (ikTarget != null)
 		{
 			_animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikStrength);
 			_animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0); //was ikStrength
-			_animator.SetIKPosition(AvatarIKGoal.RightHand, _ikTarget.position);
-			_animator.SetIKRotation(AvatarIKGoal.RightHand, _ikTarget.rotation);
+			_animator.SetIKPosition(AvatarIKGoal.RightHand, ikTarget.position);
+			_animator.SetIKRotation(AvatarIKGoal.RightHand, ikTarget.rotation);
 
 			_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikStrength);
 			_animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0); //was ikStrength
-			_animator.SetIKPosition(AvatarIKGoal.LeftHand, _ikTarget.position);
-			_animator.SetIKRotation(AvatarIKGoal.LeftHand, _ikTarget.rotation);
+			_animator.SetIKPosition(AvatarIKGoal.LeftHand, ikTarget.position);
+			_animator.SetIKRotation(AvatarIKGoal.LeftHand, ikTarget.rotation);
 
 			_animator.SetLookAtWeight(1); // we want to look at the weed
-			_animator.SetLookAtPosition(_ikTarget.position); //_lookObj
+			_animator.SetLookAtPosition(ikTarget.position); //_lookObj
 		}
 	}
 

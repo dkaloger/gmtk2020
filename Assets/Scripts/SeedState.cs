@@ -7,17 +7,13 @@ using UnityEngine;
 /// </summary>
 public class SeedState : ByTheTale.StateMachine.State
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Plant plant { get { return (Plant)machine; } }
 
     /// <summary>
     /// Goes directly to the growing state.
     /// </summary>
     public void Water()
 	{
-        machine.ChangeState<GrowingState>();
+        plant.ChangeState<GrowingState>();
 	}
 }

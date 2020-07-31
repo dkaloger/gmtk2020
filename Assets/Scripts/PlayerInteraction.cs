@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteraction : MonoBehaviour
+public abstract class PlayerInteraction : MonoBehaviour
 {
     public bool active = true;
 
-    // Start is called before the first frame update
-    void Start()
+    protected Player _player;
+
+	private void Awake()
+	{
+        _player = GameObject.FindObjectOfType<Player>();
+
+        if (_player == null)
+            Debug.LogError("Player not found in scene");
+
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -17,6 +28,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         
     }
+
+    public abstract void Interact();
 
     void OnDrawGizmos()
     {
