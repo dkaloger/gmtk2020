@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class quickfix : MonoBehaviour
+public class Fertilizer : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,6 @@ public class quickfix : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localRotation = new Quaternion(0f, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w) ;  
+        
     }
 }

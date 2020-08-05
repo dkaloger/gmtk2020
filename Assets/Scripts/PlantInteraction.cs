@@ -9,7 +9,7 @@ public class PlantInteraction : PlayerInteraction
     {
 
     }
-    public override void Interact()
+    public override void Interact(float inputValue)
     {
         throw new System.NotImplementedException();
     }

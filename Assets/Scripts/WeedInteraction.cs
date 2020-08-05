@@ -22,7 +22,7 @@ public class WeedInteraction : PlayerInteraction
     /// This function destroys a single vine out of the weed, and if it's the last remaining vine: destroys gameobject
     /// </summary>
     /// <returns>The transform of a weed's vine.</returns>
-    public override void Interact()
+    public override void Interact(float inputValue)
 	{
         Debug.Log("Weed Interact Fired");
         if (vinesToPickBeforeDestorying.Count >= 1)
@@ -40,7 +40,6 @@ public class WeedInteraction : PlayerInteraction
         //so it will be safe to destroy without disrupting the fancy physics animations
         if (vinesToPickBeforeDestorying.Count <= 0)
         {
-
             Debug.Log("Destory weed");
             //Destroy(origin.gameObject, 10f);
             //OnTriggerExit doesn't fire if the collider is disabled or destroyed, so I'm taking the hacky way and moving it into the void before destroying it a split second later).

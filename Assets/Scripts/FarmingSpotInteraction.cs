@@ -46,8 +46,12 @@ public class FarmingSpotInteraction : PlayerInteraction
 	/// <summary>
 	/// Spawn a random plant
 	/// </summary>
-	public override void Interact()
+	public override void Interact(float inputValue)
 	{
+		if (!active)
+			return;
+
+		active = false;
 		// Generate a random position in the list.
 		float pick = Random.value * _totalSpawnWeight;
 		int chosenIndex = 0;

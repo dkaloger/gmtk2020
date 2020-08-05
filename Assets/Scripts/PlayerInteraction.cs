@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class PlayerInteraction : MonoBehaviour
 {
@@ -17,19 +18,11 @@ public abstract class PlayerInteraction : MonoBehaviour
 
 	}
 
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public abstract void Interact();
+    /// <summary>
+    /// How the player interacts with the world. This function will be called for the entire time the player is holding the button
+    /// </summary>
+    /// <param name="inputValue">onFire input constrained from 0 not pressed to 1 completely pressed</param>
+    public abstract void Interact(float inputValue);
 
     void OnDrawGizmos()
     {

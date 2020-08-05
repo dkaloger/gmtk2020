@@ -48,11 +48,7 @@ public class Plant : MachineBehaviour
 
 	public override void OnTriggerStay(Collider collider)
 	{
-		base.OnTriggerStay(collider);
-
-        //if we are colliding with the trigger for the cloud, and it's raining
-        //then Water()
-        
+		base.OnTriggerStay(collider);        
 	}
 
 	public void Water()

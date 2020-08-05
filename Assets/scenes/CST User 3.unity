@@ -455,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 8332580376525344308, guid: 1085f74477354c9438cc2e676ce31281,
         type: 3}
       propertyPath: m_Name
-      value: Collaborative Scene User 2
+      value: Octopro Main Scene Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1085f74477354c9438cc2e676ce31281, type: 3}
@@ -593,7 +593,7 @@ PrefabInstance:
     - target: {fileID: 3133624565135465154, guid: 0eb2644e7451129429343e3845960a5e,
         type: 3}
       propertyPath: m_Name
-      value: Collaborative Scene User 1
+      value: GamerKing Main Scene Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0eb2644e7451129429343e3845960a5e, type: 3}
