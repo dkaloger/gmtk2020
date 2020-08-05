@@ -87,10 +87,12 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 		}
 
 		//if (current inventory item != wand)
-		if(_currentItem == 0) //TODO: fix this so it isn't hardcoded.
+		if (_currentItem == 0) //TODO: fix this so it isn't hardcoded.
+		{
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out RaycastHit hitData, 1000))
-				_interactTarget.position = hitData.point + Vector3.up * 2f;
-		else if (_currentItem == 1)
+				_interactTarget.position = hitData.point + Vector3.up * 0.5f;
+		}
+		else //if (_currentItem == 1)
 			CheckForIneractiveTargets();
 		//else //move reticle to mouse position
 
@@ -98,7 +100,6 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 
 		UpdateReticle();
 	}
-
 	void CheckForIneractiveTargets()
 	{
 		_prevTarget = _interactTarget; //Store previous target so we can see if we're going to get a new one or the same one.
@@ -224,6 +225,9 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 			interact.Interact(inputValue);
 		}
 
+		if (inputValue <= 0)
+			return; // we let go of the input, we shouldn't repeat the animations
+
 		//What did we just interact with?
 		switch (interact)
 		{
@@ -233,7 +237,7 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 			case WeedInteraction _:
 				_animator.SetTrigger("Weed");
 				break;
-			case PlantInteraction _:
+			case FarmingSpotInteraction _:
 				_animator.SetTrigger("Plant");
 				break;
 			case WaterInteraction _:

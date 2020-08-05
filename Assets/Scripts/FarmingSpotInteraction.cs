@@ -48,7 +48,7 @@ public class FarmingSpotInteraction : PlayerInteraction
 	/// </summary>
 	public override void Interact(float inputValue)
 	{
-		if (!active)
+		if (!active || inputValue <= 0f)
 			return;
 
 		active = false;

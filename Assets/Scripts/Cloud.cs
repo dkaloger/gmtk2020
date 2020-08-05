@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cloud : Boid
 {
     ParticleSystem _rainEffect;
+    ParticleSystem.EmissionModule _em;
     Player _player;
 
     // Start is called before the first frame update
@@ -14,6 +15,10 @@ public class Cloud : Boid
         if (!_player)
             _player = FindObjectOfType<Player>();
         _rainEffect = GetComponentInChildren<ParticleSystem>();
+        _em = _rainEffect.emission;
+
+        _rainEffect.Play();
+        _em.enabled = false;
     }
 
     // Update is called once per frame
@@ -26,14 +31,13 @@ public class Cloud : Boid
     public void ResetTargetToPlayer()
 	{
         _target = _player.transform;
-        _rainEffect.enableEmission = false;
+        _em.enabled = false;
 	}
 
     public void GoRainAtMousePosition()
 	{
 		_target = _player.playerInteractionReticle;
-        _rainEffect.Play();
-        _rainEffect.enableEmission = true;
+        _em.enabled = true;
     }
 
 	public void OnTriggerStay(Collider other)
