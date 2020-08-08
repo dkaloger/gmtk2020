@@ -67,7 +67,8 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 
 	void Update() 
 	{
-		transform.rotation = Quaternion.LookRotation(_facing, Vector3.up);
+		if(!_hasWheelbarrow)
+			transform.rotation = Quaternion.LookRotation(_facing, Vector3.up);
 
 		if (ikTarget)
 		{
@@ -156,7 +157,9 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 
 	public void OnMove(InputValue val) {
 		Vector2 move = val.Get<Vector2>();
-		
+
+		_animator.SetBool("HasWheelbarrow", _hasWheelbarrow);
+
 		if (_hasWheelbarrow) //move with wheelbarrow
 		{
 			_animator.SetFloat("Horizontal", move.x);

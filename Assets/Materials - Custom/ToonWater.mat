@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_B32EBE54:
+        m_Texture: {fileID: 2800000, guid: 05af417e592466846b7f92f5279cf8a2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -64,6 +68,12 @@ Material:
         m_Scale: {x: 40, y: 40}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_15E6A97D: 0.5
+    - Vector1_7B1F382: 0.59
+    - Vector1_84A3430: 0
+    - Vector1_DBB6D714: 0.5
+    - Vector1_DE39DA3E: 0.1
+    - Vector1_FA287B3E: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DepthMaxDistance: 19.1
@@ -86,6 +96,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_CDEB63E7: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - Vector2_CC484C11: {r: 0.6, g: 0.8, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGradientDeep: {r: 0.08599999, g: 0.40699998, b: 1, a: 0.749}
     - _DepthGradientShallow: {r: 0.32499996, g: 0.807, b: 0.971, a: 0.725}
