@@ -246,6 +246,9 @@ public class Player : MonoBehaviour //TODO: Switch the player to be a state mach
 			case WaterInteraction _:
 				_animator.SetTrigger("Water");
 				break;
+			case HarvestInteraction _:
+				_animator.SetTrigger("Weed"); // TODO A different animation, since she throws the weeds aside
+				break;
 			default:
 				throw new System.NotImplementedException();
 		}

@@ -20,19 +20,19 @@ public class PlayerFinances : MonoBehaviour
         UpdateFinances?.Invoke(_cash, _debt);
     }
 
-    void DepositCash(uint cash)
+    public void DepositCash(uint cash)
     {
         _cash += cash;
         UpdateFinances?.Invoke(_cash, _debt);
     }
 
-    void AddDebt(uint debt)
+    public void AddDebt(uint debt)
     {
         _debt += debt;
         UpdateFinances?.Invoke(_cash, _debt);
     }
 
-    void PayDebt()
+    public void PayDebt()
     {
         var payment = Math.Min(_cash, _debt);
         _cash -= payment;

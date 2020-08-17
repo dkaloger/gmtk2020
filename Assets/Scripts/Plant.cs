@@ -15,6 +15,8 @@ public class Plant : MachineBehaviour
 
     public float timeTillFullyGrown = 30f;
 
+    public uint cashValue = 0;
+
     [Header("Watering Settings")]
 
     [Range(0, 1)]
