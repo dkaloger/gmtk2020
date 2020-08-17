@@ -27,6 +27,10 @@ public class Boid : MonoBehaviour
     protected float _avoidForce = 2f;
 
     [SerializeField]
+    [Tooltip("The boid will stay at the Y it's set/spawned to.")]
+    protected bool _lockHeight = false;
+
+    [SerializeField]
     public Transform _target;
 
     //The colliders around this plant we are trying to avoid.
@@ -34,26 +38,30 @@ public class Boid : MonoBehaviour
 
     protected Rigidbody rb;
 
+    // I kept this private because if they override and don't call the base class it will break the rb variable. 
 	private void Awake()
 	{
         rb = GetComponent<Rigidbody>();
 	}
 
 	// Start is called before the first frame update
-	void Start()
+	protected virtual void Start()
     {
         _collidersInRange = new Collider[_maxColliders];
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    protected virtual void Update()
+    {        
         rb.velocity = getDesiredVelocity();
+        transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
     }
 
-    Vector3 getDesiredVelocity()
+    protected Vector3 getDesiredVelocity()
 	{
         Vector3 direction = _target.position - transform.position;
+        if (_lockHeight)
+            direction.y = transform.position.y;
         float distance = direction.magnitude;
 
         direction /= Mathf.Sqrt(distance);
@@ -69,11 +77,17 @@ public class Boid : MonoBehaviour
 
             //for each collider get distance
             direction = transform.position - _collidersInRange[i].transform.position;
+            
+            // for each collider we're trying to avoid we need to make sure to do it restrained to the our Y axis 2D plane. This was added for the cloud to stay in the air.
+            if (_lockHeight)
+                direction.y = transform.position.y;
+            
             float proximityWeight = 1 - (direction.magnitude / _avoidanceRadius); //percent of the way to obsticle 
                 
             ret += direction.normalized * proximityWeight * _avoidForce;
         }
 
-        return ret.normalized * _maxSpeed;
+        //return a percentage of the desired rotation (the max turn the boid is allowed to make).
+        return Vector3.Slerp(ret.normalized * _maxSpeed, transform.rotation.eulerAngles, _turningSpeed * Time.deltaTime);
     }
 }

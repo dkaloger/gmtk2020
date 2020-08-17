@@ -23,7 +23,7 @@
                 },
                 {
                     "name": "Fire",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b93ec92d-d21e-429f-91ef-2518eff53655",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -302,6 +302,28 @@
                 },
                 {
                     "name": "",
+                    "id": "706ad860-ba52-4794-8815-ac3272115fbb",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "NextItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "630fa048-e713-4a9a-8ab8-ba949b3f38a3",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "NextItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3dc81f13-a1a8-4aa6-aeff-8191519d973c",
                     "path": "<Keyboard>/z",
                     "interactions": "",
@@ -318,6 +340,28 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "PrevItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56ad803e-0dbb-4835-bd03-d404f7bc9e9e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "PrevItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df457ac0-aec9-46a8-aed6-518c7c74f484",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "PrevItem",
                     "isComposite": false,
                     "isPartOfComposite": false

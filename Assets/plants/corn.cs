@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Corn : Plant
+public class Corn : Plant //TODO: Need to break this up into states.
 {
     public bool Can_attack = false;
     public float attack_interval = 2;

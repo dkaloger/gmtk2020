@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ToonWater2
+  m_Shader: {fileID: -6465566751694194690, guid: 0579e782ebef70442816d7361c0cb577,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_2BB4CE0A:
+        m_Texture: {fileID: 2800000, guid: 42df4b3a096db384a8f701cea1f651ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_669A5A8D:
+        m_Texture: {fileID: 2800000, guid: 458002aefb9b2394a9e2947bc718bd1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B32EBE54:
+        m_Texture: {fileID: 2800000, guid: 05af417e592466846b7f92f5279cf8a2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_15E6A97D: 0.5
+    - Vector1_3410E007: 1.3
+    - Vector1_38408574: 0.75
+    - Vector1_7B1F382: 0.87
+    - Vector1_84A3430: 1
+    - Vector1_B527BCC5: 0.5
+    - Vector1_DBB6D714: 0.5
+    - Vector1_DE39DA3E: 0.1
+    - Vector1_FA287B3E: 1
+    m_Colors:
+    - Color_AD1C6FDD: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
+    - Color_B5CEF074: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - Color_CDEB63E7: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - Vector2_CC484C11: {r: 0.6, g: 0.8, b: 0, a: 0}

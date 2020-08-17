@@ -7,6 +7,7 @@ TagManager:
   - plant
   - attackable-plant
   - ground
+  - Vine
   layers:
   - Default
   - TransparentFX
