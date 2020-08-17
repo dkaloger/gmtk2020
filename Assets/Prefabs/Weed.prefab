@@ -2393,6 +2393,8 @@ MonoBehaviour:
   randomizeOnStart: 0
   _maxPositionOffset: 0
   _probabilityOfSegmentSpawningNewVine: 0.2
+  damageAmount: 0
+  damageRateInSeconds: 0
 --- !u!114 &8629867471899932432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2612,6 +2614,8 @@ MonoBehaviour:
   randomizeOnStart: 0
   _maxPositionOffset: 0
   _probabilityOfSegmentSpawningNewVine: 0.2
+  damageAmount: 0
+  damageRateInSeconds: 0
 --- !u!114 &8629867472327673757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2871,6 +2875,8 @@ MonoBehaviour:
   randomizeOnStart: 0
   _maxPositionOffset: 0
   _probabilityOfSegmentSpawningNewVine: 0.2
+  damageAmount: 0
+  damageRateInSeconds: 0
 --- !u!114 &8629867472974266920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3211,6 +3217,8 @@ MonoBehaviour:
   randomizeOnStart: 0
   _maxPositionOffset: 0
   _probabilityOfSegmentSpawningNewVine: 0.2
+  damageAmount: 0
+  damageRateInSeconds: 0
 --- !u!1 &8815217174279013432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3375,6 +3383,8 @@ MonoBehaviour:
   randomizeOnStart: 0
   _maxPositionOffset: 0
   _probabilityOfSegmentSpawningNewVine: 0.2
+  damageAmount: 0
+  damageRateInSeconds: 0
 --- !u!1 &8815217175327143451
 GameObject:
   m_ObjectHideFlags: 0
@@ -3539,6 +3549,8 @@ MonoBehaviour:
   randomizeOnStart: 0
   _maxPositionOffset: 0
   _probabilityOfSegmentSpawningNewVine: 0.2
+  damageAmount: 0
+  damageRateInSeconds: 0
 --- !u!1 &8849491352836999368
 GameObject:
   m_ObjectHideFlags: 0
