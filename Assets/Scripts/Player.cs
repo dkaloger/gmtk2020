@@ -155,8 +155,9 @@ public class Player : MachineBehaviour //TODO: Switch the player to be a state m
 	public void UpdateInteractTarget(Transform t)
 	{
 		//Check to see if the transform is something we can interact with:
-		if (t.TryGetComponent<PlayerInteraction>(out _))
+		if (t.TryGetComponent<PlayerInteraction>(out PlayerInteraction interact))
 			interactTarget = t;
+
 		//What did we just interact with?
 		switch (interact)
 		{
@@ -164,16 +165,16 @@ public class Player : MachineBehaviour //TODO: Switch the player to be a state m
 				Debug.LogWarning("PlayerInteraction returned null.");
 				break;
 			case WeedInteraction _:
-				_animator.SetTrigger("Weed");
+				Anim.SetTrigger("Weed");
 				break;
 			case FarmingSpotInteraction _:
-				_animator.SetTrigger("Plant");
+				Anim.SetTrigger("Plant");
 				break;
 			case WaterInteraction _:
-				_animator.SetTrigger("Water");
+				Anim.SetTrigger("Water");
 				break;
 			case HarvestInteraction _:
-				_animator.SetTrigger("Weed"); // TODO A different animation, since she throws the weeds aside
+				Anim.SetTrigger("Weed"); // TODO A different animation, since she throws the weeds aside
 				break;
 			default:
 				throw new System.NotImplementedException();
