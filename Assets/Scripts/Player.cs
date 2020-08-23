@@ -157,6 +157,27 @@ public class Player : MachineBehaviour //TODO: Switch the player to be a state m
 		//Check to see if the transform is something we can interact with:
 		if (t.TryGetComponent<PlayerInteraction>(out _))
 			interactTarget = t;
+		//What did we just interact with?
+		switch (interact)
+		{
+			case null:
+				Debug.LogWarning("PlayerInteraction returned null.");
+				break;
+			case WeedInteraction _:
+				_animator.SetTrigger("Weed");
+				break;
+			case FarmingSpotInteraction _:
+				_animator.SetTrigger("Plant");
+				break;
+			case WaterInteraction _:
+				_animator.SetTrigger("Water");
+				break;
+			case HarvestInteraction _:
+				_animator.SetTrigger("Weed"); // TODO A different animation, since she throws the weeds aside
+				break;
+			default:
+				throw new System.NotImplementedException();
+		}
 	}
 
 	//Called as an animation event from the pull plant animation when the player lets go during a toss of their right hand.
