@@ -85,8 +85,13 @@ public class Vine : MonoBehaviour
     [Tooltip("0 = 0%, 1 = 100$, .5 = 50%")]
     protected float _probabilityOfSegmentSpawningNewVine = .2f;
 
-	// Start is called before the first frame update
-	void Start()
+    [Header("Damage")]
+    public int damageAmount;
+    public float damageRateInSeconds;
+    private HealthDecrementer healthDecrementer;
+
+    // Start is called before the first frame update
+    void Start()
     {
         _weed = transform.parent.GetComponentInChildren<WeedInteraction>();
 
@@ -135,6 +140,11 @@ public class Vine : MonoBehaviour
         if (rate > 0 && rate < 1)
         {
             Contort();
+        }
+
+        if (rate >= 1 && healthDecrementer != null)
+        {
+            healthDecrementer.damagedEnabled = true;
         }
 
         if (disablePhysics)
@@ -258,17 +268,25 @@ public class Vine : MonoBehaviour
 
                 _weed.vinesToPickBeforeDestorying.Enqueue(seg.transform); //store the first physics segment so the player can grab it with IK
             }
-            else if (i == Mathf.Ceil(segmentCount/2)) //halfway
-			{
+            else if (i == Mathf.Ceil(segmentCount / 2))
+            {
                 //spawn object
                 GameObject plantBlock = new GameObject("Generated Plant Block Collider")
                 {
                     layer = 11
-				};
-				plantBlock.transform.position = seg.transform.position;
+                };
+                plantBlock.transform.position = seg.transform.position;
                 plantBlock.transform.SetParent(seg.transform);
                 SphereCollider plantBlockCollider = plantBlock.AddComponent<SphereCollider>();
                 plantBlockCollider.radius = i * segmentSpacing;
+            }
+            else if (i + 1 == segmentCount)
+            {
+                // last segment deals damage to anything that has health
+                healthDecrementer = seg.AddComponent<HealthDecrementer>();
+                healthDecrementer.damageAmount = damageAmount;
+                healthDecrementer.damageRateInSeconds = damageRateInSeconds;
+                healthDecrementer.damagedEnabled = false;
             }
 
             // we attach the rigidbody to the joint of the previous segment
