@@ -30,18 +30,10 @@
                     "interactions": ""
                 },
                 {
-                    "name": "NextItem",
-                    "type": "Button",
-                    "id": "c0135354-b2c7-450a-a62a-b2f3ae18e49d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "PrevItem",
-                    "type": "Button",
-                    "id": "5a205ca9-b82a-4a33-ad05-69b372a6cf01",
-                    "expectedControlType": "Button",
+                    "name": "Alt-Fire",
+                    "type": "Value",
+                    "id": "094d5f70-8b99-4aac-be38-c1faa171ea2f",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 }
@@ -280,89 +272,45 @@
                 },
                 {
                     "name": "",
-                    "id": "e3d4b1c0-14cc-49fe-b2ab-0835c651f8e6",
-                    "path": "<Keyboard>/x",
+                    "id": "a750ce55-ecc6-4e92-a95a-548c331185c6",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Alt-Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87dcc6dc-ba66-48f6-8d2d-dc38202c6218",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "NextItem",
+                    "action": "Alt-Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "35bb9cba-8e7b-46a3-8dbb-d6cff6345e3d",
-                    "path": "<Gamepad>/dpad/right",
+                    "id": "d9e4a64c-c45a-4d52-9f2b-89355fd0033d",
+                    "path": "<Touchscreen>/press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "NextItem",
+                    "groups": "Touch",
+                    "action": "Alt-Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "706ad860-ba52-4794-8815-ac3272115fbb",
-                    "path": "<Keyboard>/e",
+                    "id": "68e9bf6d-f78f-4954-8ca4-d37a5dd9df44",
+                    "path": "<XRController>/secondaryButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "NextItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "630fa048-e713-4a9a-8ab8-ba949b3f38a3",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "NextItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3dc81f13-a1a8-4aa6-aeff-8191519d973c",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "PrevItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5be71dc3-ae54-4232-8dd0-d007e048e99c",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PrevItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "56ad803e-0dbb-4835-bd03-d404f7bc9e9e",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "PrevItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "df457ac0-aec9-46a8-aed6-518c7c74f484",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "PrevItem",
+                    "groups": "XR",
+                    "action": "Alt-Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

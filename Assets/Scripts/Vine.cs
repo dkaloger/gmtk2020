@@ -258,7 +258,7 @@ public class Vine : MonoBehaviour
 
                 _weed.vinesToPickBeforeDestorying.Enqueue(seg.transform); //store the first physics segment so the player can grab it with IK
             }
-            else if (i == Mathf.Ceil(segmentCount/2))
+            else if (i == Mathf.Ceil(segmentCount/2)) //halfway
 			{
                 //spawn object
                 GameObject plantBlock = new GameObject("Generated Plant Block Collider")

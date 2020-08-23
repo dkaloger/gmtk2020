@@ -1816,13 +1816,20 @@ MonoBehaviour:
   rightHand: {fileID: 4695697330974815856}
   ikTarget: {fileID: 0}
   _speed: 10
-  _timeBetweenTrips: 10
-  _inventory:
-  - {fileID: 2362832740456971610}
-  - {fileID: 7767414872582536372}
+  timeBetweenTrips: 10
+  inventoryRadialMenu: {fileID: 0}
+  inventory:
+  - inventoryItem: {fileID: 0}
+    playerState: 0
+  - inventoryItem: {fileID: 0}
+    playerState: 1
+  - inventoryItem: {fileID: 2362832740456971610}
+    playerState: 2
+  - inventoryItem: {fileID: 7767414872582536372}
+    playerState: 3
   playerInteractionReticle: {fileID: 5950110218188819481}
-  _playerInteractionRange: 8
-  _playerInteractionReticleRotationSpeed: 2
+  interactionRange: 8
+  playerInteractionReticleRotationSpeed: 1
 --- !u!114 &6541842814828292568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,7 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 81bf6064605e0494c911869c3bd6ddd2,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -1850,21 +1857,43 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6541842814828292574}
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 651f22b7-5fc7-44dc-995c-f023de62cfa6
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6541842814828292574}
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6063cb6f-7d5d-4e1d-ab33-3722e009f4f0
     m_ActionName: Player/Look[/XInputControllerWindows/rightStick,/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6541842814828292575}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 6541842814828292574}
+        m_MethodName: OnFire
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1913,13 +1942,20 @@ MonoBehaviour:
     m_ActionId: ec397bb9-abcb-44a5-aee5-3bc6706c37a2
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c0135354-b2c7-450a-a62a-b2f3ae18e49d
-    m_ActionName: Player/NextItem[/Keyboard/x]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5a205ca9-b82a-4a33-ad05-69b372a6cf01
-    m_ActionName: Player/PrevItem[/Keyboard/z]
+      m_Calls:
+      - m_Target: {fileID: 6541842814828292574}
+        m_MethodName: OnAltFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 094d5f70-8b99-4aac-be38-c1faa171ea2f
+    m_ActionName: Player/Alt-Fire[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

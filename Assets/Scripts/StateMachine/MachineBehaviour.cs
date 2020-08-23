@@ -21,7 +21,7 @@
         {
             AddStates();
 
-            currentState = initialState;
+            currentState = previousState = initialState;
             if (null == currentState)
             {
                 throw new System.Exception("\n" + name + ".nextState is null on Initialize()!\tDid you forget to call SetInitialState()?\n");
@@ -41,6 +41,7 @@
             if (onExit)
             {
                 currentState.Exit();
+                previousState = currentState;
                 currentState = nextState;
                 nextState = null;
 
@@ -149,6 +150,21 @@
         public void SetInitialState<T>() where T : State { initialState = states[typeof(T)]; }
         public void SetInitialState(System.Type T) { initialState = states[T]; }
 
+        public void RevertToPreviousState() //Nathan
+        {
+            if (null != nextState)
+            {
+                throw new System.Exception(name + " is already changing states, you must wait to call ChangeState()!\n");
+            }
+
+            if(currentState == previousState)
+                throw new System.Exception("\n" + name + ".RevertToPreviousState() is the same as the current state!\tNothing happened, try changing to a new state before reverting?\n");
+
+            nextState = previousState;
+            onExit = true;
+        }
+
+
         public void ChangeState<T>() where T : State { ChangeState(typeof(T)); }
         public void ChangeState(System.Type T)
         {
@@ -168,6 +184,9 @@
 
             onExit = true;
         }
+
+        public bool IsPreviousState<T>() where T : State { return (previousState.GetType() == typeof(T)) ? true : false; } //Nathan
+        public bool IsPreviousState(System.Type T) { return (previousState.GetType() == T) ? true : false; } //Nathan
 
         public bool IsCurrentState<T>() where T : State { return (currentState.GetType() == typeof(T)) ? true : false; }
         public bool IsCurrentState(System.Type T) { return (currentState.GetType() == T) ? true : false; }
@@ -201,14 +220,16 @@
 
         public void RemoveAllStates() { states.Clear(); }
 
+        public T PreviousState<T>() where T : State { return (T)previousState; } //Nathan
+
         public T CurrentState<T>() where T : State { return (T)currentState; }
 
         public T GetState<T>() where T : State { return (T)states[typeof(T)]; }
 
-
-        protected State currentState { get; set; }
-        protected State nextState { get; set; }
-        protected State initialState { get; set; }
+        protected virtual State previousState { get; set; } //Nathan
+        protected virtual State currentState { get; set; }
+        protected virtual State nextState { get; set; }
+        protected virtual State initialState { get; set; }
 
         protected bool onEnter { get; set; }
         protected bool onExit { get; set; }

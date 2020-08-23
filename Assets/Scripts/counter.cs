@@ -5,14 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class counter : MonoBehaviour
 {
-
-
-
-
-
     public float timeLeft = 3.0f;
     public Text startText; // used for showing countdown from 3, 2, 1 
-
 
     void Update()
     {
