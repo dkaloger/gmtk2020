@@ -25,8 +25,6 @@ public class Player : MachineBehaviour //TODO: Switch the player to be a state m
 
 	protected bool _hasWheelbarrow = false; //TODO: toggle this state when the player grabs the wheelbarrow. //Possibly make a getter/setter so we can change the animator states to match this.
 
-	Vector3 _facing = Vector3.forward;
-
 	public float timeBetweenTrips = 10f;
 
 	[Header("Player Inventory")]
@@ -56,7 +54,6 @@ public class Player : MachineBehaviour //TODO: Switch the player to be a state m
 	int _maxInteractionsToCheck = 30; // This determines how many colliders near the player can be checked to be made the "active" interaction item
 	internal Transform interactTarget { get; set; } // Interaction trigger itself
 	public Collider[] possibleInteractions { get; private set; } // Uses _maxInteractionsToCheck as array length
-	private Transform _prevTarget;
 
 	/// <summary>
 	/// we are overriding the currentState to require the use of a PlayerState so we can call specific fuctions in all states such as OnMove() and Interact()
@@ -129,7 +126,6 @@ public class Player : MachineBehaviour //TODO: Switch the player to be a state m
 			_menu.SetAllChildrenEnabled();
 		else
 			_menu.MakeSelection(Mouse.current.position.ReadValue() - previousMousePos);
-
 	}
 
 	public void SetStateToWater()

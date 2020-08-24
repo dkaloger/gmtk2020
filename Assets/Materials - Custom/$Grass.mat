@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: $Grass
-  m_Shader: {fileID: -6465566751694194690, guid: 6e46157ddaacf2444a968cb6bfcc2060,
+  m_Shader: {fileID: -6465566751694194690, guid: e3e222ef4450db34d87ae7b78cfdf0d8,
     type: 3}
   m_ShaderKeywords: _GLOSSINESS_FROM_BASE_ALPHA _SPECULAR_COLOR
   m_LightmapFlags: 4
@@ -104,8 +104,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - Color_AD1C6FDD: {r: 1, g: 1, b: 1, a: 0}
-    - Color_B5CEF074: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - Color_AD1C6FDD: {r: 0, g: 0, b: 0, a: 0}
+    - Color_B5CEF074: {r: 0, g: 0.6698113, b: 0, a: 1}
+    - Color_D7CDCDAF: {r: 0.04775612, g: 0.6037736, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
